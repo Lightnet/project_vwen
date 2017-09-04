@@ -40,30 +40,35 @@ targetpath = buildroot + '/' + project   #holds the path to the executable in th
 #print("BUILD builddir:" + builddir)
 #print("BUILD targetpath:" + targetpath)
 
-if projecttool == 'mingw':
-	env = Environment(tools = ['mingw'])
-#else:
-	#env = Environment()
-
-print(ARGUMENTS.get('msvc', 0))
-
 if sys.platform == 'win32':
 	pass
 
+if projecttool == 'mingw':
+	env = Environment(tools = ['mingw'])
+	
 if projecttool == 'vs2017':
-	env = Environment(ENV = {'PATH' : os.environ['PATH']}) # Initialize the environment
+	#http://scons.org/doc/0.97/HTML/scons-man.html
+	#env = Environment(ENV = {'PATH' : os.environ['PATH']}) # Initialize the environment
+
+	#need to lanuch vcvars32.bat script so it can be add to os.environ else it will display 'cl' is not recognized as an internal or external command
+
+	#this will deal with the Visual Studio 
+	env = Environment(ENV = os.environ) #this load user complete external environment
+	#print(env)
+	#print("*** ENV: ", env)
+	#print(os.environ)
 	#env = Environment(ENV = {'PATH' : os.environ['PATH']}, MSVC_USE_SCRIPT = "C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Auxiliary/Build/vcvars32.bat") # Initialize the environment
 	#env = Environment(ENV = {'PATH' : os.environ['PATH']}, MSVC_VERSION='14.0') # Initialize the environment
 	#env = Environment(ENV = {'PATH' : os.environ['PATH']}) # Initialize the environment
 	#env.PrependENVPath('PATH', 		'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/bin/HostX86/x86/')
 	#env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/lib/x86/')
 
-	env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/lib/x86')
-	env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Windows Kits/10/Lib/10.0.15063.0/um/x86')
-	env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Windows Kits/10/Lib/10.0.15063.0/ucrt/x86')
+	#env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/lib/x86')
+	#env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Windows Kits/10/Lib/10.0.15063.0/um/x86')
+	#env.AppendENVPath('LIB', 		'C:/Program Files (x86)/Windows Kits/10/Lib/10.0.15063.0/ucrt/x86')
 
 	#This deal with link tmp build
-	env['ENV']['TMP'] = os.environ['TMP']
+	#env['ENV']['TMP'] = os.environ['TMP']
 	#env.Append(CPPDEFINES = ['DEBUG', '_DEBUG'])
 	#env.Append(CCFLAGS='/MDd')
 	#env.Append(CCFLAGS=Split('/Zi /Fd${TARGET}.pdb'))
@@ -83,12 +88,12 @@ env.Append(LINKFLAGS=[]) # -pg
 #append the user's additional compile flags
 #assume debugcflags and releasecflags are defined
 
-if projectmode == 'debug':
+#if projectmode == 'debug':
 	#env.Append(CCFLAGS=debugcflags)
-	pass
-else:
+	#pass
+#else:
 	#env.Append(CCFLAGS=releasecflags)
-	pass
+	#pass
 #Repository('c:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/include/')
 
 
