@@ -30,7 +30,7 @@ print('**** Compiling in ' + projectmode + ' mode...')
 #releasecflags = ['-O2', '-EHsc', '-DNDEBUG', '/MD']
 #-------
 
-project = 'helloworld'					#holds the project name
+project = 'main'					#holds the project name
 buildroot = './bin/' + projectmode		#holds the root of the build directory tree
 builddir = './' + project  				#holds the build directory for this project
 targetpath = buildroot + '/' + project	#holds the path to the executable in the build directory
@@ -42,7 +42,12 @@ if sys.platform == 'win32':
 	pass
 
 if projecttool == 'mingw': #mingw tool
-	env = Environment(tools = ['mingw'])
+	env = Environment(ENV = os.environ, tools = ['mingw'])
+	#env.Append(LINKCOM = "$LINK -o $TARGET $SOURCES $_LIBDIRFLAGS $_LIBFLAGS $LINKFLAGS")
+	#env.Append(LINKFLAGS="-static-libgcc") # -pg
+	#link lib
+	env.Append(LINKFLAGS='-static-libgcc -static-libstdc++')
+	
 
 elif projecttool == 'window': #window tool default to vs2017
 	#http://scons.org/doc/0.97/HTML/scons-man.html
@@ -77,13 +82,18 @@ else:
 cur_dir = os.getcwd()
 env.Append(CCFLAGS = '-I ' + cur_dir) # for boost find in include path
 #env.Append(CCFLAGS = '-g -std=c++0x -Wall -Wfatal-errors') #-msse2 -pg
-env.Append(LINKFLAGS=[]) # -pg
+#env.Append(CCFLAGS = '-static-libgcc') #-msse2 -pg
+#env.Append(LINKFLAGS=[]) # -pg
 
 #specify the build directory
 VariantDir('#' + builddir, "#.", duplicate=0)
 
+#simple hello world
+#env.Program(target = targetpath,source = [ "helloworld/helloworld.c"])
 
-env.Program(target = targetpath,source = [ "helloworld/helloworld.c"])
+env.Program(target = targetpath,source = [ "main/main.cpp"])
+
+#env.Program(target = targetpath,source = [ "main/main.cpp"], LIBPATH='.', LINKFLAGS='-static-libgcc', LIBS=[static])
 
 
 print("**** Script Finish Here!")
