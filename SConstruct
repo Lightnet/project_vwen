@@ -79,14 +79,15 @@ else:
 	#env = Environment()
 	pass
 # https://stackoverflow.com/questions/15934944/how-to-build-c-project-with-scons-2-3-visual-express-2012
+
+#append the user's additional compile flags
+#assume debugcflags and releasecflags are defined
 #env.Append(CCFLAGS = '-fno-strict-aliasing') # for angelscript compile see doc
 cur_dir = os.getcwd()
 env.Append(CCFLAGS = '-I ' + cur_dir) # for boost find in include path
 #env.Append(CCFLAGS = '-g -std=c++0x -Wall -Wfatal-errors') #-msse2 -pg
 env.Append(LINKFLAGS=[]) # -pg
 
-#append the user's additional compile flags
-#assume debugcflags and releasecflags are defined
 
 #if projectmode == 'debug':
 	#env.Append(CCFLAGS=debugcflags)
@@ -95,18 +96,18 @@ env.Append(LINKFLAGS=[]) # -pg
 	#env.Append(CCFLAGS=releasecflags)
 	#pass
 #Repository('c:/Program Files (x86)/Microsoft Visual Studio/2017/Community/VC/Tools/MSVC/14.11.25503/include/')
-
-
+#env.Program(targetpath, source=map(lambda x: '#' + builddir + '/' + x, glob.glob('*.c')))
+#env.Program(targetpath, source = [ "helloworld/hello.c"])
 
 #specify the build directory
 VariantDir('#' + builddir, "#.", duplicate=0)
 #print("BUILD DIR:" + builddir)
-#env.Program(targetpath, source=map(lambda x: '#' + builddir + '/' + x, glob.glob('*.c')))
-#env.Program(targetpath, source = [ "helloworld/hello.c"])
-if projecttool == 'mingw':
-	env.Program(targetpath, source = [ "helloworld/hello.c"])
-if projecttool == 'vs2017':
-	env.Program(targetpath, source = [ "helloworld/hellovs2017.c"])
+#if projecttool == 'mingw':
+	#env.Program(targetpath, source = [ "helloworld/hello.c"])
+#if projecttool == 'vs2017':
+	#env.Program(targetpath, source = [ "helloworld/hellovs2017.c"])
+
+env.Program(target = targetpath,source = [ "helloworld/helloworld.c"])
 
 
 #env = Environment(ENV = {'PATH' : os.environ['PATH']}) # Initialize the environment
@@ -117,4 +118,4 @@ if projecttool == 'vs2017':
 	#print("Other")
 	#env = Environment(tools = ['mingw']) # Initialize the environment	
 #env.Program(target = 'bin/helloworld', source = [ "src/hello.c"])
-print("Script Finish Here!")
+print("**** Script Finish Here!")
