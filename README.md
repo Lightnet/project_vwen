@@ -20,15 +20,19 @@ Information: By using the python scons script compiler build c/c++ application f
 Note the default tool is mingw but it might change later on.
 
 [Mingw]
+
    `scons tool=mingw`
 
 [window 10 | viusal studio]
-   `scons tool=vs2017`
+
+   `scons tool=window`
 
 [Linux]
+
    `scons ::None yet` 
 
 [Mac]
+
    `scons ::None yet` 
 
 Notes:
