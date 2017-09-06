@@ -13,7 +13,13 @@ Programs:
  * VS2017 Window 10 (compiler tool)
  * Mingw (compiler tool)
 
-Information: By using the python scons script compiler build c/c++ application for Visual Studio Code to run task builds.
+Information: By using the python 2.7 scons script compiler build c/c++ application for Visual Studio Code to run task builds.
+
+
+Third Parties:
+ * Imgui
+ * SDL 
+
 
 [Scons Builds]:
 

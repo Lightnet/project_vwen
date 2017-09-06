@@ -1,89 +1,53 @@
-//#include "main.h"
 /*
-#include <iostream>
 
-using namespace std;
 
-int main() 
-{
-    std::cout << "Hello, World!";
-    return 0;
-}
 */
 
-#include <windows.h>
+#include <imgui.h>
+#include "imgui_impl_sdl.h"
+#include <SDL.h>
+#include <SDL_opengl.h>
 
-const char g_szClassName[] = "myWindowClass";
-
-// Step 4: the Window Procedure
-LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
+int main(int argc, char* argv[])
 {
-    switch(msg)
-    {
-        case WM_CLOSE:
-            DestroyWindow(hwnd);
-        break;
-        case WM_DESTROY:
-            PostQuitMessage(0);
-        break;
-        default:
-            return DefWindowProc(hwnd, msg, wParam, lParam);
-    }
-    return 0;
-}
+	int posX = 100, posY = 100, width = 640, height = 480;
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-    LPSTR lpCmdLine, int nCmdShow)
-{
-    WNDCLASSEX wc;
-    HWND hwnd;
-    MSG Msg;
+	SDL_Init(SDL_INIT_VIDEO);
 
-    //Step 1: Registering the Window Class
-    wc.cbSize        = sizeof(WNDCLASSEX);
-    wc.style         = 0;
-    wc.lpfnWndProc   = WndProc;
-    wc.cbClsExtra    = 0;
-    wc.cbWndExtra    = 0;
-    wc.hInstance     = hInstance;
-    wc.hIcon         = LoadIcon(NULL, IDI_APPLICATION);
-    wc.hCursor       = LoadCursor(NULL, IDC_ARROW);
-    wc.hbrBackground = (HBRUSH)(COLOR_WINDOW+1);
-    wc.lpszMenuName  = NULL;
-    wc.lpszClassName = g_szClassName;
-    wc.hIconSm       = LoadIcon(NULL, IDI_APPLICATION);
+	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
+	SDL_DisplayMode current;
+	SDL_GetCurrentDisplayMode(0, &current);
+	SDL_Window *win = SDL_CreateWindow("ImGui SDL2+OpenGL VWEN", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1280, 720, SDL_WINDOW_OPENGL | SDL_WINDOW_RESIZABLE);
+	SDL_GLContext glcontext = SDL_GL_CreateContext(win);
 
-    if(!RegisterClassEx(&wc))
-    {
-        MessageBox(NULL, "Window Registration Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
-        return 0;
-    }
+	ImGui_ImplSdlGL2_Init(win);
 
-    // Step 2: Creating the Window
-    hwnd = CreateWindowEx(
-        WS_EX_CLIENTEDGE,
-        g_szClassName,
-        "The title of my window",
-        WS_OVERLAPPEDWINDOW,
-        CW_USEDEFAULT, CW_USEDEFAULT, 240, 120,
-        NULL, NULL, hInstance, NULL);
-
-    if(hwnd == NULL)
-    {
-        MessageBox(NULL, "Window Creation Failed!", "Error!",
-            MB_ICONEXCLAMATION | MB_OK);
-        return 0;
-    }
-
-    ShowWindow(hwnd, nCmdShow);
-    UpdateWindow(hwnd);
-
-    // Step 3: The Message Loop
-    while(GetMessage(&Msg, NULL, 0, 0) > 0)
-    {
-        TranslateMessage(&Msg);
-        DispatchMessage(&Msg);
-    }
-    return Msg.wParam;
+	ImVec4 clear_color = ImColor(114, 144, 154);
+	while (1) {
+		SDL_Event e;
+		if (SDL_PollEvent(&e)) {
+			ImGui_ImplSdlGL2_ProcessEvent(&e);
+			if (e.type == SDL_QUIT) {
+				break;
+			}
+		}
+		ImGui_ImplSdlGL2_NewFrame(win);
+		ImGui::Begin("My window");
+		ImGui::Text("Hello world.");
+		ImGui::End();
+		glViewport(0, 0, (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
+		glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
+		glClear(GL_COLOR_BUFFER_BIT);
+		ImGui::Render();
+		SDL_GL_SwapWindow(win);
+	}
+	ImGui_ImplSdlGL2_Shutdown();
+	SDL_GL_DeleteContext(glcontext);
+	SDL_DestroyWindow(win);
+	SDL_Quit();
+	return 0;
 }
