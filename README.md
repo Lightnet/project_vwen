@@ -45,3 +45,4 @@ Note the default tool is mingw but it might change later on.
 
 Notes:
  * Firewall or security programs can block builds and compilers.
+ * vsbuild.bat need to config right dir. for vs2017
