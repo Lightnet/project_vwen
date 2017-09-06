@@ -88,10 +88,12 @@ int main(int, char**) //main entry point
         // 2. Show another simple window, this time using an explicit Begin/End pair
         if (show_another_window)
         {
-            ImGui::SetNextWindowSize(ImVec2(200,100), ImGuiCond_FirstUseEver);
-            ImGui::Begin("Another Window", &show_another_window);
-            ImGui::Text("Hello");
-            ImGui::End();
+            //ImGui::SetNextWindowSize(ImVec2(200,100), ImGuiCond_FirstUseEver);
+            //ImGui::Begin("Another Window", &show_another_window);
+            //ImGui::Text("Hello");
+            //ImGui::End();
+
+            EditorWindow(&show_another_window);
         }
 
         // 3. Show the ImGui test window. Most of the sample code is in ImGui::ShowTestWindow()
