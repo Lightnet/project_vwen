@@ -1,5 +1,7 @@
 /*
+	Project: VWEN
 
+	Information: Main entry. SDL and ImGui
 
 */
 

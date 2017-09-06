@@ -8,41 +8,32 @@
             "taskName": "Build with SCons Mingw Debug",
             "command": "scons mode=debug",
             "type": "shell",
-            "group": "build",
-            "problemMatcher": "$msCompile" // Important to catch the status
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": "$msCompile"
         },
-
         {
             "taskName": "Build with SCons Mingw Release",
             "command": "scons mode=release",
             "type": "shell",
             "group": "build",
-            "problemMatcher": "$msCompile" // Important to catch the status
+            "problemMatcher": "$msCompile"
         },
-
         {
             "taskName": "Build with SCons Visual Studio Debug",
-            "problemMatcher": "$msCompile", // Important to catch the status
+            "problemMatcher": "$msCompile",
             "group": "build",
             "isShellCommand": true,
-            "command": "./vsbuild.bat",
-            //"windows": {
-                //"command": "echo %cd%",
-                //"isShellCommand": true
-            //}
+            "command": "./vsbuild.bat"
         },
-
         {
             "taskName": "Build with SCons Visual Studio Release",
-            "problemMatcher": "$msCompile", // Important to catch the status
+            "problemMatcher": "$msCompile",
             "group": "build",
             "isShellCommand": true,
-            "command": "./vsbuild.bat",
-            //"windows": {
-                //"command": "echo %cd%",
-                //"isShellCommand": true
-            //}
+            "command": "./vsbuild.bat"
         }
-
     ]
 }

@@ -5,7 +5,7 @@
             "name": "(Windows) Launch",
             "type": "cppvsdbg",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/release/helloworld.exe",
+            "program": "${workspaceRoot}/bin/debug/project_vwen.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceRoot}",
