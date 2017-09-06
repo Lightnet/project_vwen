@@ -19,7 +19,7 @@ void NodeInit(){
 }
 
 void EditorWindow(bool* p_open){
-
+	
 	ImGui::SetNextWindowSize(ImVec2(200,100), ImGuiCond_FirstUseEver);
 	ImGui::Begin("Another Window", p_open);
 	ImGui::Text("Editor Panel");

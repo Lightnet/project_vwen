@@ -16,6 +16,11 @@ projectmode = ARGUMENTS.get('mode', 'debug')   #holds current mode
 projecttool = ARGUMENTS.get('tool', 'mingw')   #holds current mode
 #projecttool = 'window'
 
+#projectaction = ARGUMENTS.get('action', 'none')   #holds current action
+#none = does nothing
+#clean = clean up files
+
+
 print("**** TOOL:" + projecttool)
 
 #check if the user has been naughty: only 'debug' or 'release' allowed
@@ -44,6 +49,41 @@ builddir = './' + projectpackage  			#holds the build directory for this project
 targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
 #-------
 
+#thirdparty_libs = []
+#thirdparty_includes = []
+
+#--include files
+include_packages = []
+include_packages.append(SDL2_INCLUDE_PATH)
+include_packages.append(IMGUI_PATH)
+include_packages.append('libs\\gl3w')
+
+#--engine node packages
+core_packages = []
+core_packages.append('core')
+core_packages.append('server')
+core_packages.append('scene')
+core_packages.append('modules')
+core_packages.append('editor')
+
+#third parties packages
+lib_packages = []
+lib_packages.append('opengl32')
+lib_packages.append('gl3w')
+lib_packages.append('imgui')
+lib_packages.append('SDL2main')
+lib_packages.append('SDL2')
+lib_packages.append('SDL2test')
+
+#--add list
+lib_packages += core_packages
+include_packages +=core_packages
+
+#for libname in lib_packages:
+	#print(libname)
+#print(lib_packages)
+
+#--check for tool types
 if projecttool == 'mingw': #mingw tool
 	env = Environment(ENV = os.environ, tools = ['mingw'])
 	env.Append(CCFLAGS = '-g')#-g (debug) flag
@@ -61,13 +101,11 @@ else:
 	env = Environment(ENV = os.environ) #this load user complete external environment
 	#pass
 
-system = platform.system()
-
-#thirdparty_libs = []
-
 #--------
 # Operating System Checks and Tools
 #--------
+system = platform.system()
+
 if system=='Windows':
 	print("**** OS: WINDOW")
 	if projecttool == 'window':
@@ -80,15 +118,20 @@ if system=='Windows':
 		print("**** Mingw Tool")
 		#pass
 
-	env.Append(CPPPATH=[SDL2_INCLUDE_PATH,IMGUI_PATH,'libs\\gl3w','editor']) #SDL2, Imgui, Gl3w
+	env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
 	#Repository('C:\\SDL2-2.0.5\\include','imgui')
 	#build lib file
-	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
-
-
-	env.Library(buildroot + '\\editor',Glob('editor' + '\\*.cpp')) #Imgui
-
+	#--gl
 	env.Library(buildroot + '\\gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
+	#--imgui
+	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
+	#--engine nodes
+	#env.Library(buildroot + '\\editor',Glob('editor' + '\\*.cpp')) #editor
+	for basename in core_packages:
+		#print("package name:",basename)
+		env.Library(buildroot + '\\'+ basename,Glob(basename + '\\*.cpp')) #core nodes
+		pass
+
 	#copy file or folder to bin dir
 	env.Install(buildroot,"libs\SDL2.dll") #copy dll to output
 	#application
@@ -97,6 +140,6 @@ if system=='Windows':
 		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
 
 	if projecttool == 'window':
-		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test','editor'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
+		env.Program(targetpath, Glob(builddir + '\\*.cpp'), LIBS=lib_packages, LIBPATH=['.', buildroot, SDL2_LIB_PATH])
 
 print("**** Script Finish Here! Win32")

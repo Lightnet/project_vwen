@@ -23,20 +23,26 @@
         },
         */
         {
+            "taskName": "Scons window clean files",
+            "problemMatcher": "$msCompile",
+            "type":"shell",
+            "command": "scons tool=window -c"
+        },
+        {
             "taskName": "Build with SCons Debug 32bit",
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "isShellCommand": true,
+            //"isShellCommand": true,
             "command": "${workspaceRoot}/vsbuild.bat"
         },
         {
             "taskName": "Build with SCons Release 32bit",
             "problemMatcher": "$msCompile",
             "group": "build",
-            "isShellCommand": true,
+            //"isShellCommand": true,
             "command": "${workspaceRoot}/vsbuild.bat"
         }
     ]

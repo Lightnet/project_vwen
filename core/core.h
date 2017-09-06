@@ -1,6 +1,4 @@
 #define CORE_H
 
-class Core{
-	
-	
-}
+//class Core{
+//}

@@ -1,6 +1,4 @@
 #define SCENE_H
 
-class Scene{
-	
-	
-}
+//class Scene{
+//}
