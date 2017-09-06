@@ -9,8 +9,7 @@
             "command": "scons mode=debug",
             "type": "shell",
             "group": {
-                "kind": "build",
-                "isDefault": true
+                "kind": "build"
             },
             "problemMatcher": "$msCompile"
         },
@@ -24,7 +23,10 @@
         {
             "taskName": "Build with SCons Visual Studio Debug",
             "problemMatcher": "$msCompile",
-            "group": "build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
             "isShellCommand": true,
             "command": "./vsbuild.bat"
         },

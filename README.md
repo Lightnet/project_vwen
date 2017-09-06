@@ -28,6 +28,8 @@ Note the default tool is mingw but it might change later on.
 [Mingw]
 
    `scons tool=mingw`
+   
+   * Does not work with GL3
 
 [window 10 | viusal studio]
 

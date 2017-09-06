@@ -6,13 +6,18 @@
 */
 
 #include <imgui.h>
-#include "imgui_impl_sdl.h"
+#include "imgui_impl_sdl_gl2.h"
 #include <SDL.h>
 #include <SDL_opengl.h>
-
+/*
 int main(int argc, char* argv[])
 {
 	int posX = 100, posY = 100, width = 640, height = 480;
+	float slide = 0.0f;
+	bool show_test_window = true;
+	bool show_another_window = false;
+	
+	static float f = 0.0f;
 
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -40,7 +45,23 @@ int main(int argc, char* argv[])
 		ImGui_ImplSdlGL2_NewFrame(win);
 		ImGui::Begin("My window");
 		ImGui::Text("Hello world.");
+		//ImGui::SliderFloat("float", slide, 0.0f, 1.0f);
+		if (ImGui::Button("Test Window")) show_test_window ^= 1;
+		if (ImGui::Button("Another Window")) show_another_window ^= 1;
+		ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		//static float f = 0.0f;
+		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+
+		if (show_another_window)
+        {
+            ImGui::Begin("Another Window", &show_another_window);
+            ImGui::Text("Hello from another window!");
+            ImGui::End();
+        }
+
 		ImGui::End();
+
+
 		glViewport(0, 0, (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
 		glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
 		glClear(GL_COLOR_BUFFER_BIT);
@@ -53,3 +74,4 @@ int main(int argc, char* argv[])
 	SDL_Quit();
 	return 0;
 }
+*/

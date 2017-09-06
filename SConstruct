@@ -46,6 +46,7 @@ if projecttool == 'mingw': #mingw tool
 	env.Append(CCFLAGS = '-g')#-g (debug) flag
 	#link lib
 	env.Append(LINKFLAGS='-static-libgcc -static-libstdc++')
+	#env.Append(LINKFLAGS='-static-libgcc -static-libstdc++ -lopengl32 -lgdi32')
 elif projecttool == 'window': #window tool default to vs2017
 	#http://scons.org/doc/0.97/HTML/scons-man.html
 	#need to lanuch vcvars32.bat script so it can be add to os.environ else it will display 'cl' is not recognized as an internal or external command
@@ -75,14 +76,20 @@ if system=='Windows':
 		print("**** Mingw Tool")
 		#pass
 
-	env.Append(CPPPATH=[SDL2_INCLUDE_PATH,IMGUI_PATH])
+	env.Append(CPPPATH=[SDL2_INCLUDE_PATH,IMGUI_PATH,'libs\\gl3w']) #SDL2, Imgui, Gl3w
 	#Repository('C:\\SDL2-2.0.5\\include','imgui')
 	#build lib file
-	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp'))
-	#copy file or folder to bin dir
-	env.Install(buildroot,"libs\SDL2.dll")
-	#application
-	env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
+	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
 
+	env.Library(buildroot + '\\gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
+	#copy file or folder to bin dir
+	env.Install(buildroot,"libs\SDL2.dll") #copy dll to output
+	#application
+	if projecttool == 'mingw':
+		#error for address get
+		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
+
+	if projecttool == 'window':
+		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
 
 print("**** Script Finish Here! Win32")
