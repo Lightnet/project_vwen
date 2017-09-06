@@ -63,7 +63,7 @@ int main(int, char**)
                 done = true;
         }
         ImGui_ImplSdlGL3_NewFrame(window);
-
+        
         // 1. Show a simple window
         // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
         {
@@ -75,7 +75,7 @@ int main(int, char**)
             if (ImGui::Button("Another Window")) show_another_window ^= 1;
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         }
-
+        
         // 2. Show another simple window, this time using an explicit Begin/End pair
         if (show_another_window)
         {
@@ -91,7 +91,7 @@ int main(int, char**)
             ImGui::SetNextWindowPos(ImVec2(650, 20), ImGuiCond_FirstUseEver);
             ImGui::ShowTestWindow(&show_test_window);
         }
-
+        
         // Rendering
         glViewport(0, 0, (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
