@@ -9,8 +9,10 @@
 #include "imgui_impl_sdl_gl2.h"
 #include <SDL.h>
 #include <SDL_opengl.h>
-/*
-int main(int argc, char* argv[])
+
+
+//int main(int argc, char* argv[]) //main entry point
+int nomain(int argc, char* argv[])//dummy main
 {
 	int posX = 100, posY = 100, width = 640, height = 480;
 	float slide = 0.0f;
@@ -74,4 +76,3 @@ int main(int argc, char* argv[])
 	SDL_Quit();
 	return 0;
 }
-*/

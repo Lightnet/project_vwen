@@ -34,6 +34,9 @@ IMGUI_PATH = 'imgui'
 #--------
 # Main application folder dir and output folder
 #--------
+VS_TOOL_BAT = 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\Build\\vcvars32.bat' #window
+
+
 projectname = 'project_vwen'				#holds the project name
 projectpackage = 'main'						#holds the project folder
 buildroot = './bin/' + projectmode			#holds the root of the build directory tree
@@ -51,6 +54,7 @@ elif projecttool == 'window': #window tool default to vs2017
 	#http://scons.org/doc/0.97/HTML/scons-man.html
 	#need to lanuch vcvars32.bat script so it can be add to os.environ else it will display 'cl' is not recognized as an internal or external command
 	#this will deal with the Visual Studio 
+	#env = Environment(ENV = os.environ, MSVC_USE_SCRIPT=VS_TOOL_BAT)
 	env = Environment(ENV = os.environ) #this load user complete external environment
 else:
 	#default current tool from os
@@ -76,10 +80,13 @@ if system=='Windows':
 		print("**** Mingw Tool")
 		#pass
 
-	env.Append(CPPPATH=[SDL2_INCLUDE_PATH,IMGUI_PATH,'libs\\gl3w']) #SDL2, Imgui, Gl3w
+	env.Append(CPPPATH=[SDL2_INCLUDE_PATH,IMGUI_PATH,'libs\\gl3w','editor']) #SDL2, Imgui, Gl3w
 	#Repository('C:\\SDL2-2.0.5\\include','imgui')
 	#build lib file
 	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
+
+
+	env.Library(buildroot + '\\editor',Glob('editor' + '\\*.cpp')) #Imgui
 
 	env.Library(buildroot + '\\gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
 	#copy file or folder to bin dir
@@ -90,6 +97,6 @@ if system=='Windows':
 		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
 
 	if projecttool == 'window':
-		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
+		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test','editor'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
 
 print("**** Script Finish Here! Win32")

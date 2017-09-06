@@ -4,6 +4,7 @@
     "version": "2.0.0",
     //"command": "bash",
     "tasks": [
+        /*
         {
             "taskName": "Build with SCons Mingw Debug",
             "command": "scons mode=debug",
@@ -20,22 +21,23 @@
             "group": "build",
             "problemMatcher": "$msCompile"
         },
+        */
         {
-            "taskName": "Build with SCons Visual Studio Debug",
+            "taskName": "Build with SCons Debug 32bit",
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "isShellCommand": true,
-            "command": "./vsbuild.bat"
+            "command": "${workspaceRoot}/vsbuild.bat"
         },
         {
-            "taskName": "Build with SCons Visual Studio Release",
+            "taskName": "Build with SCons Release 32bit",
             "problemMatcher": "$msCompile",
             "group": "build",
             "isShellCommand": true,
-            "command": "./vsbuild.bat"
+            "command": "${workspaceRoot}/vsbuild.bat"
         }
     ]
 }
