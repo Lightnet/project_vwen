@@ -57,6 +57,7 @@ include_packages = []
 include_packages.append(SDL2_INCLUDE_PATH)
 include_packages.append(IMGUI_PATH)
 include_packages.append('libs\\gl3w')
+include_packages.append('libs\\glfw\\include')
 
 #--engine node packages
 core_packages = []
@@ -70,6 +71,7 @@ core_packages.append('editor')
 lib_packages = []
 lib_packages.append('opengl32')
 lib_packages.append('gl3w')
+lib_packages.append('glfw3')
 lib_packages.append('imgui')
 lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
@@ -112,6 +114,7 @@ if system=='Windows':
 		print("**** Window Tool")
 		# Something to do with link error
 		env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+		env.Append(LINKFLAGS=['/NODEFAULTLIB:library'])
 		#pass
 
 	if projecttool == 'mingw':
@@ -123,6 +126,8 @@ if system=='Windows':
 	#build lib file
 	#--gl
 	env.Library(buildroot + '\\gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
+	env.Library(buildroot+'\\glfw3',"libs\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
+
 	#--imgui
 	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
 	#--engine nodes
@@ -133,7 +138,9 @@ if system=='Windows':
 		pass
 
 	#copy file or folder to bin dir
-	env.Install(buildroot,"libs\SDL2.dll") #copy dll to output
+	env.Install(buildroot,"libs\\SDL2.dll") #copy dll to output
+
+	env.Install(buildroot,"libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output
 	#application
 	if projecttool == 'mingw':
 		#error for address get
