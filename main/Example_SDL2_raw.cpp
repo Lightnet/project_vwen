@@ -1,32 +1,24 @@
-/*
-	Project: VWEN
+/*This source code copyrighted by Lazy Foo' Productions (2004-2015)
+and may not be redistributed without written permission.*/
 
-	Information: Main entry. SDL and ImGui
-
-*/
-
+//Using SDL and standard IO
 #include <imgui.h>
-#include "imgui_impl_sdl_gl3.h"
+//#include "imgui_impl_sdl_gl3.h"
 #include <stdio.h>
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
 
-#include <editor.h>
-
-
-//int main(int, char**) //main entry point
-int main_gl3(int, char**) //main entry point
+//int main(int, char**)
+int main_raw(int, char**)
 {
-    // Setup SDL
+	// Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
     {
         printf("Error: %s\n", SDL_GetError());
         return -1;
     }
 
-    NodeInit();
-
-    // Setup window
+	// Setup window
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -41,17 +33,7 @@ int main_gl3(int, char**) //main entry point
     gl3wInit();
 
     // Setup ImGui binding
-    ImGui_ImplSdlGL3_Init(window);
-
-    // Load Fonts
-    // (there is a default font, this is only if you want to change it. see extra_fonts/README.txt for more details)
-    //ImGuiIO& io = ImGui::GetIO();
-    //io.Fonts->AddFontDefault();
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/Cousine-Regular.ttf", 15.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/DroidSans.ttf", 16.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/ProggyClean.ttf", 13.0f);
-    //io.Fonts->AddFontFromFileTTF("../../extra_fonts/ProggyTiny.ttf", 10.0f);
-    //io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, NULL, io.Fonts->GetGlyphRangesJapanese());
+    //ImGui_ImplSdlGL3_Init(window);
 
     bool show_test_window = true;
     bool show_another_window = false;
@@ -64,10 +46,11 @@ int main_gl3(int, char**) //main entry point
         SDL_Event event;
         while (SDL_PollEvent(&event))
         {
-            ImGui_ImplSdlGL3_ProcessEvent(&event);
+            //ImGui_ImplSdlGL3_ProcessEvent(&event);
             if (event.type == SDL_QUIT)
                 done = true;
         }
+        /*
         ImGui_ImplSdlGL3_NewFrame(window);
         
         // 1. Show a simple window
@@ -106,14 +89,15 @@ int main_gl3(int, char**) //main entry point
         
         // Rendering
         glViewport(0, 0, (int)ImGui::GetIO().DisplaySize.x, (int)ImGui::GetIO().DisplaySize.y);
+        */
         glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
-        ImGui::Render();
+        //ImGui::Render();
         SDL_GL_SwapWindow(window);
     }
 
     // Cleanup
-    ImGui_ImplSdlGL3_Shutdown();
+    //ImGui_ImplSdlGL3_Shutdown();
     SDL_GL_DeleteContext(glcontext);
     SDL_DestroyWindow(window);
     SDL_Quit();

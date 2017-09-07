@@ -12,7 +12,7 @@
 
 
 //int main(int argc, char* argv[]) //main entry point
-int nomain(int argc, char* argv[])//dummy main
+int main_gl2(int argc, char* argv[])//dummy main
 {
 	int posX = 100, posY = 100, width = 640, height = 480;
 	float slide = 0.0f;
