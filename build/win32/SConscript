@@ -1,0 +1,7 @@
+#!python
+# import these variables from the parent build script
+#Import('env', 'sources', 'static_libs', 'test_sources')
+Import('env')
+
+print("script win32 build")
+print(env)

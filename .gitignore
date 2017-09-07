@@ -6,3 +6,4 @@
 bin/
 imgui.ini
 sh.exe.stackdump
+*.pyc

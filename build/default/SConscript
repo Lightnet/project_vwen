@@ -1,0 +1,2 @@
+#!python 
+print("script default build")
