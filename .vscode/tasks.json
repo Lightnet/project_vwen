@@ -4,28 +4,30 @@
     "version": "2.0.0",
     //"command": "bash",
     "tasks": [
-        /*
         {
-            "taskName": "Build with SCons Mingw Debug",
-            "command": "scons mode=debug",
-            "type": "shell",
-            "group": {
-                "kind": "build"
-            },
-            "problemMatcher": "$msCompile"
+            "taskName": "Launch Edtior",
+            "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
+            "args": [
+                "-editor"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ]
         },
         {
-            "taskName": "Build with SCons Mingw Release",
-            "command": "scons mode=release",
-            "type": "shell",
-            "group": "build",
-            "problemMatcher": "$msCompile"
+            "taskName": "Launch Server",
+            "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
+            "args": [
+                "-server"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ]
         },
-        */
         {
             "taskName": "Scons window clean files",
             "problemMatcher": "$msCompile",
-            "type":"shell",
+            "type": "shell",
             "command": "scons tool=window -c"
         },
         {
@@ -35,14 +37,12 @@
                 "kind": "build",
                 "isDefault": true
             },
-            //"isShellCommand": true,
             "command": "${workspaceRoot}/vsbuild.bat"
         },
         {
             "taskName": "Build with SCons Release 32bit",
             "problemMatcher": "$msCompile",
             "group": "build",
-            //"isShellCommand": true,
             "command": "${workspaceRoot}/vsbuild.bat"
         }
     ]
