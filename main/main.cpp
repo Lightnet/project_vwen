@@ -26,15 +26,15 @@ static void error_callback(int error, const char* description)
 
 static void show_usage(std::string name)
 {
-    //std::cerr << "Usage: " << argv[0] << " <option(s)> SOURCES"
-              //<< "Options:\n"
-              //<< "\t-h,--help\t\tShow this help message\n"
-              //<< "\t-d,--destination DESTINATION\tSpecify the destination path"
-              //<< std::endl;
+    std::cerr << "Usage: " << "" << " <option(s)> SOURCES \n"
+              << "Options:\n"
+              << "\t-h,--help\t\tShow this help message\n"
+              << "\t-d,--destination DESTINATION\tSpecify the destination path"
+              << std::endl;
 }
 
-int main(int argc, char* argv[])
-//int main_glfw(int, char**)
+//int main(int argc, char* argv[])
+int main_glfw(int argc, char* argv[])
 {
     //using namespace std;
 
@@ -42,32 +42,14 @@ int main(int argc, char* argv[])
 
 	if (argc < 3) {
         //printf(string(argc));
-        //show_usage(argv[0]);
+        show_usage(argv[0]);
         //printf("Len = %f",argc);
         //return 1;
     }
 
-    //string arg = "";
-
-    //stringstream ss;
-    //string oString;
-
     for (int i = 1; i < argc; ++i) {
         //std::string arg = argv[i];
-        char* arg = argv[i];
-        //string sarg = "-editor";
-        //string sarg = "test";
-
-        //printf("TEST:",sarg);
-        //std::cout << "Char ARG: " << sarg << "\n";
-        std::string sarg(arg);
-        //std::cout << "Char ARG: " << sarg << "\n";
-        //std::string str(arg);
-        //ss << arg;
-        //ss >> sarg;
-        //oString= arg.string;
-
-        //std::string arg(argv[i]);
+        std::string sarg( argv[i] );
         if ((sarg == "-h") || (sarg == "--help")) {
             //show_usage(argv[0]);
             printf("help here?");
