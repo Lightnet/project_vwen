@@ -1,6 +1,8 @@
 #!python
 import os
 
+CURRENT_DIR = os.getcwd()
+
 #--------
 # Config files
 #--------
@@ -29,8 +31,8 @@ target_name = 'project_vwen'
 #--include files
 include_packages = []
 include_packages.append(SDL2_INCLUDE_PATH)
-include_packages.append('libs\\gl3w')
-include_packages.append('libs\\glfw\\include')
+include_packages.append(CURRENT_DIR + os.sep +'libs\\gl3w')
+include_packages.append(CURRENT_DIR + os.sep +'libs\\glfw\\include')
 #include_packages.append(SRC_PATH)
 #include_packages.append(IMGUI_PATH)
 

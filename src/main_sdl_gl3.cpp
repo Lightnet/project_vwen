@@ -12,11 +12,11 @@
 //#include <stdio.h>
 //#include "editor.h"
 //https://stackoverflow.com/questions/6847360/error-lnk2019-unresolved-external-symbol-main-referenced-in-function-tmainc
-#undef main
+//#undef main
 
 
-//int main_gl3(int, char*) //dummy main entry point 
-int main(int, char*) //main entry point
+int main_gl3(int, char*) //dummy main entry point 
+//int main(int, char*) //main entry point
 {
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
