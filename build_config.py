@@ -31,6 +31,7 @@ target_name = 'project_vwen'
 #--include files
 include_packages = []
 include_packages.append(SDL2_INCLUDE_PATH)
+include_packages.append(CURRENT_DIR + os.sep +'src\\')
 include_packages.append(CURRENT_DIR + os.sep +'libs\\gl3w')
 include_packages.append(CURRENT_DIR + os.sep +'libs\\glfw\\include')
 #include_packages.append(SRC_PATH)
@@ -52,6 +53,7 @@ lib_packages = []
 lib_packages.append('opengl32')
 lib_packages.append('gl3w')
 lib_packages.append('glfw3')
+lib_packages.append('glad')
 lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
 lib_packages.append('SDL2test')

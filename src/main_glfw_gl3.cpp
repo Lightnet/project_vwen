@@ -33,8 +33,8 @@ static void show_usage(std::string name)
               << std::endl;
 }
 
-int main(int argc, char* argv[])
-//int main_glfw(int argc, char* argv[])
+//int main(int argc, char* argv[])
+int main_glfw(int argc, char* argv[])
 {
     //using namespace std;
 
@@ -71,10 +71,6 @@ int main(int argc, char* argv[])
             printf("default\n");
         }
     }
-
-    //ss = nullptr;
-
-
 
     // Setup window
     glfwSetErrorCallback(error_callback);

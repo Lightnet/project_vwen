@@ -19,6 +19,7 @@ for basename in core_packages:
 env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
 #build lib file
 #--gl
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'src\\glad\\*.c')) #Gl3w
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'libs\\gl3w\\GL\\*.c')) #Gl3w
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "libs\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
 #--sdl2
