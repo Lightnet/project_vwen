@@ -3,5 +3,7 @@
 #Import('env', 'sources', 'static_libs', 'test_sources')
 Import('env')
 
-print("script win32 build")
-print(env)
+print("**** Sub Script win32 Config Build")
+#print(env)
+
+env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])

@@ -15,8 +15,8 @@
 
 //https://www.khronos.org/opengl/wiki/Tutorial1:_Creating_a_Cross_Platform_OpenGL_3.2_Context_in_SDL_(C_/_SDL)
 
-int main(int, char**) //main entry point
-//int main_sdl(int, char*) //main entry point
+//int main(int, char**) //main entry point
+int main_sdl(int, char*) //main entry point
 {
     SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER);
 

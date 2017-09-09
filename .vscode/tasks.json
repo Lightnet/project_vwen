@@ -5,7 +5,7 @@
     //"command": "bash",
     "tasks": [
         {
-            "taskName": "Launch Edtior",
+            "taskName": "Launch Edtior Release",
             "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
             "args": [
                 "-editor"
@@ -15,7 +15,7 @@
             ]
         },
         {
-            "taskName": "Launch Server",
+            "taskName": "Launch Server Release",
             "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
             "args": [
                 "-server"
@@ -25,25 +25,56 @@
             ]
         },
         {
-            "taskName": "Scons window clean files",
-            "problemMatcher": "$msCompile",
-            "type": "shell",
-            "command": "scons tool=window -c"
+            "taskName": "Launch Application Release",
+            "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
+            "args": [
+                "-server"
+            ],
+            "problemMatcher": [
+                "$msCompile"
+            ]
         },
         {
-            "taskName": "Build with SCons Debug 32bit",
+            "taskName": "Build with Scons OS debug ",
+            "problemMatcher": "$msCompile",
+            "type": "shell",
+            "command": "scons mode=debug"
+        },
+        {
+            "taskName": "Build with Scons OS Release ",
+            "problemMatcher": "$msCompile",
+            "type": "shell",
+            "command": "scons mode=release"
+        },
+        {
+            "taskName": "Scons window debug clean ",
+            "problemMatcher": "$msCompile",
+            "type": "shell",
+            "command": "scons mode=debug -c"
+        },
+        {
+            "taskName": "Scons window release clean ",
+            "problemMatcher": "$msCompile",
+            "type": "shell",
+            "command": "scons mode=release -c"
+        },
+        {
+            "taskName": "Build with SCons Debug Window",
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "command": "${workspaceRoot}/vsbuild_debug.bat"
+        },
+        {
+            "taskName": "Build with SCons Release Window",
             "problemMatcher": "$msCompile",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
-            "command": "${workspaceRoot}/vsbuild.bat"
-        },
-        {
-            "taskName": "Build with SCons Release 32bit",
-            "problemMatcher": "$msCompile",
-            "group": "build",
-            "command": "${workspaceRoot}/vsbuild.bat"
+            "command": "${workspaceRoot}/vsbuild_release.bat"
         }
     ]
 }

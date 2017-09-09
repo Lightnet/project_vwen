@@ -7,31 +7,25 @@
 
 #include <imgui.h>
 #include "imgui_impl_sdl_gl3.h"
-#include <stdio.h>
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
-
-#include <editor.h>
-
-/*
-    SDL_init(SDL_INIT_VIDEO);
-    SDL_Window *win = SDL_CREATEWINDOW(
-        "Hello",0,0,640,480,SDL_WINDOW_OPENGL);
-    SDL_GL_CreateContent(win);
-*/
+//#include <stdio.h>
+//#include "editor.h"
+//https://stackoverflow.com/questions/6847360/error-lnk2019-unresolved-external-symbol-main-referenced-in-function-tmainc
+#undef main
 
 
-//int main(int, char**) //main entry point
-int main_gl3(int, char*) //main entry point
+//int main_gl3(int, char*) //dummy main entry point 
+int main(int, char*) //main entry point
 {
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)
     {
-        printf("Error: %s\n", SDL_GetError());
+        //printf("Error: %s\n", SDL_GetError());
         return -1;
     }
 
-    NodeInit();
+    //NodeInit();
 
     // Setup window
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
@@ -87,7 +81,7 @@ int main_gl3(int, char*) //main entry point
             if (ImGui::Button("Test Window"))
             {
                 show_test_window ^= 1;
-                printf("Window Click\n");
+                //printf("Window Click\n");
             }
             if (ImGui::Button("Another Window")) show_another_window ^= 1;
             ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
@@ -101,7 +95,7 @@ int main_gl3(int, char*) //main entry point
             //ImGui::Text("Hello");
             //ImGui::End();
 
-            EditorWindow(&show_another_window);
+            //EditorWindow(&show_another_window);
         }
 
         // 3. Show the ImGui test window. Most of the sample code is in ImGui::ShowTestWindow()

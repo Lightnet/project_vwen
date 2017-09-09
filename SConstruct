@@ -1,27 +1,21 @@
 #!python 
-
 # this script help compile builds
-
 import platform
 import os
 import sys
 import glob
-from build_support import *
-from build_config import *
+
+from build_config import * #build configs
+from build_support import * #build helper
 
 print("Project Script Config!")
-#print("Current Dir: " + os.getcwd())
 
 #get the mode flag from the command line
-#default to 'debug' if the user didn't specify
-#projectmode = ARGUMENTS.get('mode', 'release')   #holds current mode
-projectmode = ARGUMENTS.get('mode', 'debug')   #holds current mode
-#print("MODE: "+projectmode)
+#default to 'release' if the user didn't specify
+projectmode = ARGUMENTS.get('mode', 'release')   #holds current mode
+projecttool = ARGUMENTS.get('tool', 'window')   
 
-projecttool = ARGUMENTS.get('tool', 'mingw')   #holds current mode
-#projecttool = 'window'
-
-print("**** TOOL:" + projecttool)
+#print("**** TOOL:" + projecttool)
 
 #check if the user has been naughty: only 'debug' or 'release' allowed
 if not (projectmode in ['debug','release']):
@@ -33,21 +27,13 @@ print('**** Compiling in ' + projectmode + ' mode...')
 buildroot = './bin/' + projectmode			#holds the root of the build directory tree
 targetpath = buildroot + '/' + projectname	#holds the path to the executable in the build directory
 
-
-
-#--check for tool types
-if projecttool == 'mingw': #mingw tool
-	env = Environment(ENV = os.environ, tools = ['mingw'])
-	env.Append(CCFLAGS = '-g')#-g (debug) flag
-	#link lib
-	env.Append(LINKFLAGS='-static-libgcc -static-libstdc++')
-	#env.Append(LINKFLAGS='-static-libgcc -static-libstdc++ -lopengl32 -lgdi32')
-elif projecttool == 'window': #window tool default to vs2017
+if projecttool == 'window': #window tool default to vs2017
 	#http://scons.org/doc/0.97/HTML/scons-man.html
 	#need to lanuch vcvars32.bat script so it can be add to os.environ else it will display 'cl' is not recognized as an internal or external command
 	#this will deal with the Visual Studio 
 	#env = Environment(ENV = os.environ, MSVC_USE_SCRIPT=VS_TOOL_BAT)
 	env = Environment(ENV = os.environ) #this load user complete external environment
+
 else:
 	#default current tool from os
 	env = Environment(ENV = os.environ) #this load user complete external environment
@@ -61,51 +47,38 @@ Export('env')
 target_dir = '#' + SelectBuildDir(build_base_dir)
 SConscript(target_dir + os.sep + 'SConscript')
 
+#env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #SDL2 need this
 
-#--------
-# Operating System Checks and Tools
-#--------
-system = platform.system()
+for basename in core_packages:
+	include_packages.append(SRC_PATH + os.sep + basename) #header file basefile.h
+print("Include:")
+print(include_packages)
+env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
+#build lib file
+#--gl
+env.Library(buildroot + os.sep + 'gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
+env.Library(buildroot + os.sep + 'glfw3',"libs\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
+#--sdl2
+#env.Library(buildroot + os.sep + 'SDL2',Glob("C:\\SDL2-2.0.5\\lib\\x86\\*.lib")) #
+#env.Library(buildroot + os.sep + 'SDL2', "C:\\SDL2-2.0.5\\lib\\x86\\SDL2.lib") #
+#env.Library(buildroot + os.sep + 'SDL2main',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2main.lib") #
+#env.Library(buildroot + os.sep + 'SDL2test',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2test.lib") #
 
-if system=='Windows':
-	print("**** OS: WINDOW")
-	if projecttool == 'window':
-		print("**** Window Tool")
-		# Something to do with link error
-		env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
-		env.Append(LINKFLAGS=['/NODEFAULTLIB:library'])
-		#pass
+for basename in core_packages:
+	env.Library(buildroot + os.sep + basename, Glob(SRC_PATH + os.sep + basename + os.sep + '*.cpp')) #core nodes
+	pass
 
-	if projecttool == 'mingw':
-		print("**** Mingw Tool")
-		#pass
+print(core_packages)
+#--SDL2
+env.Install(buildroot,"libs\\SDL2.dll") #copy dll to output bin
+#--glfw3
+#env.Install(buildroot,"libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
+#application
+#print("LIBS:")
+#print(lib_packages)
+#print("Bin:")
+#print(buildroot)
+#print("Main:",builddir + os.sep + '*.cpp')
+env.Program(targetpath, Glob(builddir + os.sep + '*.cpp'), LIBS=lib_packages, LIBPATH=['.','src', buildroot, SDL2_LIB_PATH])
 
-	env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
-	#Repository('C:\\SDL2-2.0.5\\include','imgui')
-	#build lib file
-	#--gl
-	env.Library(buildroot + '\\gl3w',Glob('libs\\gl3w\\GL\\*.c')) #Gl3w
-	env.Library(buildroot+'\\glfw3',"libs\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
-
-	#--imgui
-	env.Library(buildroot + '\\imgui',Glob(IMGUI_PATH + '\\*.cpp')) #Imgui
-	#--engine nodes
-	#env.Library(buildroot + '\\editor',Glob('editor' + '\\*.cpp')) #editor
-	for basename in core_packages:
-		#print("package name:",basename)
-		env.Library(buildroot + '\\'+ basename,Glob(basename + '\\*.cpp')) #core nodes
-		pass
-
-	#copy file or folder to bin dir
-	env.Install(buildroot,"libs\\SDL2.dll") #copy dll to output
-
-	env.Install(buildroot,"libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output
-	#application
-	if projecttool == 'mingw':
-		#error for address get
-		env.Program(targetpath, Glob(builddir + '\\*.cpp'),LIBS=['opengl32','gl3w','imgui','SDL2main','SDL2','SDL2test'],LIBPATH=['.',buildroot ,SDL2_LIB_PATH])
-
-	if projecttool == 'window':
-		env.Program(targetpath, Glob(builddir + '\\*.cpp'), LIBS=lib_packages, LIBPATH=['.', buildroot, SDL2_LIB_PATH])
-
-print("**** Script Finish Here! Win32")
+print("**** Script Finish Here!")

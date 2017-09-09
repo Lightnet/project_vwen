@@ -16,6 +16,9 @@ Programs:
 Information: By using the python 2.7 scons script compiler build c/c++ application for Visual Studio Code to run task builds.
 
 
+`#undef main` SDL2 for main entery
+
+
 Third Parties:
  * Imgui
  * SDL 
@@ -23,7 +26,7 @@ Third Parties:
 
 [Scons Builds]:
 
-Note the default tool is mingw but it might change later on.
+Default build VS2017 Window 10 32bit
 
 [Mingw]
 

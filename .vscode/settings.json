@@ -49,8 +49,7 @@
         "xfunctional": "cpp",
         "xhash": "cpp"
     },
-    "projectname":"project_vwen",   //project name
-    "development_mode":"debug",     //development build mode
-    "output_dir":"bin",             //out put bin builds
-    "output_program":"project_vwen" //default without the application execute without ext file
+    "development_mode":"release",       //development build mode
+    "output_dir":"bin",                 //out put bin builds
+    "output_program":"project_vwen"     //default without the application execute without ext file
 }
