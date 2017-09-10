@@ -1,6 +1,6 @@
-
-
-
+/*
+    *
+*/
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -48,7 +48,8 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 
-int main(void)
+//int main(void)
+int main_glfw_glad(void)
 {
     GLFWwindow* window;
     GLuint vertex_buffer, vertex_shader, fragment_shader, program;
@@ -58,6 +59,9 @@ int main(void)
         exit(EXIT_FAILURE);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    //glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     window = glfwCreateWindow(640, 480, "Simple example", NULL, NULL);
     if (!window)
     {

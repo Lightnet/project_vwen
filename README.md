@@ -49,3 +49,8 @@ Default build VS2017 Window 10 32bit
 Notes:
  * Firewall or security programs can block builds and compilers.
  * vsbuild.bat need to config right dir. for vs2017
+
+
+
+ Refs:
+  * ...
