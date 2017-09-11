@@ -1,2 +1,38 @@
 #!python 
-print("script linux build")
+import os
+
+print("**** Sub Script linux Config Build")
+#print(env)
+#env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+#env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #SDL2 need this
+for basename in core_packages:
+	include_packages.append(CURRENT_DIR + os.sep + SRC_PATH + os.sep + basename) #header file basefile.h
+	#pass
+#print("Include:")
+#print(include_packages)
+env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
+#build lib file
+#--gl
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'src\\glad\\*.c')) #Gl3w
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'libs\\gl3w\\GL\\*.c')) #Gl3w
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "libs\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
+#--sdl2
+#env.Library(buildroot + os.sep + 'SDL2',Glob("C:\\SDL2-2.0.5\\lib\\x86\\*.lib")) #
+#env.Library(buildroot + os.sep + 'SDL2', "C:\\SDL2-2.0.5\\lib\\x86\\SDL2.lib") #
+#env.Library(buildroot + os.sep + 'SDL2main',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2main.lib") #
+#env.Library(buildroot + os.sep + 'SDL2test',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2test.lib") #
+
+for basename in core_packages:
+	env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + basename, Glob(CURRENT_DIR + os.sep + SRC_PATH + os.sep + basename + os.sep + '*.cpp')) #core nodes
+	#pass
+#print(core_packages)
+#--SDL2
+env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "libs\\SDL2.dll") #copy dll to output bin
+#--glfw3
+env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
+
+#print("LIBS:")
+#print(lib_packages)
+#print("Bin:")
+#print(buildroot)
+#print("Main:",builddir + os.sep + '*.cpp')

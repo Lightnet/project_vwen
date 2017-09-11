@@ -1,6 +1,6 @@
 
 
-
+https://stackoverflow.com/questions/8558703/building-msvc-project-with-cmake-and-command-line
 
 
 

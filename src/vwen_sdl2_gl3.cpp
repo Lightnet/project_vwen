@@ -4,17 +4,17 @@
 	Information: Main entry. SDL and ImGui
 
 */
-
+#include "vwen_sdl2_gl3.h"
 #include <imgui.h>
-#include "imgui_impl_sdl_gl3.h"
+#include "imgui_impl_sdl2_gl3.h"
 #include <stdio.h>
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
-//#include "editor.h"
 
 
-int main_gl3(int, char*) //main entry point
-//int main(int, char*) //main entry point
+//#undef main
+
+int vwen_sdl2_gl3(int argc, char* argv[]) //main entry point
 {
     // Setup SDL
     if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_TIMER) != 0)

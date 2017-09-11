@@ -9,6 +9,7 @@ print("**** Sub Script win32 Config Build")
 #print(env)
 
 env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+env.AppendUnique(CXXFLAGS=["/MD","/EHsc"])
 
 #env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #SDL2 need this
 for basename in core_packages:

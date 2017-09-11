@@ -4,13 +4,18 @@ and may not be redistributed without written permission.*/
 
 
 #include <imgui.h>
+#include <imgui_impl_sdl_glad.h>
+
 //Using SDL and standard IO
-#include <glad/glad.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
+#include <glad.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
+#include <SDL_syswm.h>
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdio.h>
 #include <string>
+
+
 #include "linmath.h"
 
 #undef main
@@ -46,9 +51,38 @@ static const char* fragment_shader_text =
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+// Window management
+bool quit = false; // exit program
+SDL_Window *window = NULL;
+SDL_GLContext glContext;
+SDL_Event event;
 
-int main( int argc, char* args[] )
-//int main_sdl2( int argc, char* args[])
+// Window parameters
+char title[] = "First Window"; // window's title
+short unsigned int wHeight       = 600;
+short unsigned int wWidth        = 800;
+short unsigned int initialPosX   = 100;
+short unsigned int initialPosY   = 100;
+
+// OpenGL
+GLuint shaderProgram;
+
+GLuint VAO; // vertex array object
+GLuint VBO; // vertex buffer object
+
+//GLuint vertices = 3;
+GLfloat vVertices[] = {0.0f, -0.5f, 0.0f,
+                       -0.5f, 0.5f, 0.0f,
+                        0.5f, 0.5f, 0.0f};
+
+void _sdlError(const char *mes)
+{
+	fprintf(stderr, "%s: %s\n", mes, SDL_GetError());
+	exit(1);
+}
+
+//int main( int argc, char* args[] )
+int main_sdl2( int argc, char* args[])
 {
 	//The window we'll be rendering to
 	SDL_Window* window = NULL;
@@ -67,15 +101,36 @@ int main( int argc, char* args[] )
 	}
 	else
 	{
+		// Request an OpenGL 4.5 context (should be core)
+		//SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+		SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+		// Also request a depth buffer
+		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+		SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+
 		//Create window
-		window = SDL_CreateWindow( "SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
+		window = SDL_CreateWindow( "SDL Glad GL", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN );
 		if( window == NULL )
 		{
 			printf( "Window could not be created! SDL_Error: %s\n", SDL_GetError() );
 		}
 		else
 		{
-            
+			
+			// Check OpenGL properties
+			printf("OpenGL loaded\n");
+			gladLoadGLLoader(SDL_GL_GetProcAddress);
+
+			//if(!gladLoadGL()) { exit(-1); }
+			//printf("OpenGL Version %d.%d loaded\n", GLVersion.major, GLVersion.minor);
+
+			//printf("Vendor:   %s\n", glGetString(GL_VENDOR));
+			//printf("Renderer: %s\n", glGetString(GL_RENDERER));
+			//printf("Version:  %s\n", glGetString(GL_VERSION));
+
+
+			printf("Start Loop...\n");
 			// Main loop
 			bool done = false;
 			while (!done)

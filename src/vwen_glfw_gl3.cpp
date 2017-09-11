@@ -34,12 +34,11 @@ static void show_usage(std::string name)
 }
 
 //int main(int argc, char* argv[])
-int main_glfw(int argc, char* argv[])
+int vwen_glfw_gl3(int argc, char* argv[])
 {
     //using namespace std;
-
-    printf("Len = %i \n",argc);
-
+    //printf("Len = %i \n",argc);
+    /*
 	if (argc < 3) {
         //printf(string(argc));
         show_usage(argv[0]);
@@ -71,6 +70,7 @@ int main_glfw(int argc, char* argv[])
             printf("default\n");
         }
     }
+    */
 
     // Setup window
     glfwSetErrorCallback(error_callback);
