@@ -5,8 +5,8 @@
 
 */
 
-#include <imgui.h>
-#include "imgui_impl_glfw_glad.h"
+//#include <imgui.h>
+//#include "imgui_impl_glfw_glad.h"
 
 #include <glad/glad.h> // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <GLFW/glfw3.h>
@@ -19,7 +19,6 @@
 #include "linmath.h"
 
 GLuint vbo;
-
 
 bool firstMouse = true;
 bool guiIsOpen = true;
@@ -38,8 +37,6 @@ GLfloat deltaTime = 0.0f;
 GLfloat lastFrame = 0.0f;
 GLfloat lastPosX = renderWidth / 2;
 GLfloat lastPosY = renderHeight / 2;
-
-
 
 static const struct
 {
@@ -84,17 +81,6 @@ using namespace std;
     //fprintf(stderr, "Error %d: %s\n", error, description);
 //}
 
-static void show_usage(std::string name)
-{
-    /*
-    std::cerr << "Usage: " << "" << " <option(s)> SOURCES \n"
-              << "Options:\n"
-              << "\t-h,--help\t\tShow this help message\n"
-              << "\t-d,--destination DESTINATION\tSpecify the destination path"
-              << std::endl;
-              */
-}
-
 
 //https://github.com/JoshuaSenouf/LumenEngine/blob/cuda/src/renderer/renderer.cpp
 void resetRender()
@@ -123,43 +109,7 @@ void displayGLBuffer() // Currently using the old OpenGL pipeline, should switch
 //int main(int argc, char* argv[])
 int vwen_glfw_glad_cube(int argc, char* argv[])
 {
-    //using namespace std;
-    /*
-    printf("Len = %i \n",argc);
-
-	if (argc < 3) {
-        //printf(string(argc));
-        show_usage(argv[0]);
-        //printf("Len = %f",argc);
-        //return 1;
-    }
-
-    for (int i = 1; i < argc; ++i) {
-        //std::string arg = argv[i];
-        std::string sarg( argv[i] );
-        if ((sarg == "-h") || (sarg == "--help")) {
-            //show_usage(argv[0]);
-            printf("help here?");
-            //return 0;
-        } else if ((sarg == "-d") || (sarg == "--destination")) {
-            if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-                //destination = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
-            } else { // Uh-oh, there was no argument to the destination option.
-                  //std::cerr << "--destination option requires one argument." << std::endl;
-                //return 1;
-            }  
-        }else if(sarg == "-editor"){
-            printf("found editor!");
-        }else if(sarg == "-server"){
-            printf("found server!");
-        }else {
-            //sources.push_back(argv[i]);
-            //printf("default | arg: %s \n",sarg);
-            printf("default\n");
-        }
-    }
-    */
-
+   
     // Setup window
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
@@ -178,16 +128,10 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
     //gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
     gladLoadGL();
 
-    //bool show_test_window = true;
-    //bool show_another_window = false;
-    //ImVec4 clear_color = ImColor(114, 144, 154);
-
-
     GLuint vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;
 
     // NOTE: OpenGL error checks have been omitted for brevity
-    /*
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -210,36 +154,17 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
     glEnableVertexAttribArray(vcol_location);
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
                           sizeof(float) * 5, (void*) (sizeof(float) * 2));
-    */
-    // Setup ImGui binding
-    ImGui_ImplGlfwGL3_Init(window, true);
 
-    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     printf("Start Loop");
     // Main loop
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        
-        ImGui_ImplGlfwGL3_NewFrame();
-
-        //ImGuiIO& io = ImGui::GetIO();
 
         float ratio;
         int width, height;
-        //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        //glClear(GL_COLOR_BUFFER_BIT);
-
-        // 1. Show a simple window
-        // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
-        {
-            //static float f = 0.0f;
-            ImGui::Text("Hello, world!");
-            ImGui::End();
-        }
-        //resetRender();
-        /*
         mat4x4 m, p, mvp;
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float) height;
@@ -253,23 +178,13 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        */
-        //glBindVertexArray(0);
-
-        //glBindVertexArray(VAO);
-
-        //displayGLBuffer(); // Display the data inside the VBO
-        ImGui::Render();
-        //glfwSwapBuffers(window);
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
         glfwSwapBuffers(window);
-        //glfwPollEvents();
     }
 
     // Cleanup
     glfwDestroyWindow(window);
     glfwTerminate();
-    ImGui_ImplGlfwGL3_Shutdown();
     glfwTerminate();
 
     return 0;

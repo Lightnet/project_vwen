@@ -3,7 +3,7 @@
 	Information: SDL2 and ImGui
 */
 //#include "vwen/vwen_sdl2_gl3.h"
-#include "vwen/vwen_glfw_gl3.h"
+#include <vwen_glfw_gl3.h>
 //#include <vwen/vwen_glfw_glad_cube.h>
 
 #include <stdio.h>
@@ -29,7 +29,8 @@ static void show_usage(std::string name)
 			  << "\t-d,-server\t\t(Lanuch Server)\n"
               << std::endl;
 }
-/*
+//----
+
 int main(int argc, char* argv[]) //main entry point
 {
 	if (argc < 3) {
@@ -70,4 +71,3 @@ int main(int argc, char* argv[]) //main entry point
 
     return 0;
 }
-*/

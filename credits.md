@@ -9,3 +9,4 @@ Links for refs:
  * https://www.khronos.org/opengl/wiki/OpenGL_Loading_Library
 
  * https://github.com/ZenToad/kiss_engine
+ * https://github.com/JoshuaSenouf/LumenEngine/blob/cuda/src/renderer/renderer.cpp
