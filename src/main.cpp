@@ -1,77 +1,19 @@
-/*
-	Project: VWEN
-
-	Information: Main entry. SDL and ImGui
-
-*/
+// ImGui - standalone example application for Glfw + OpenGL 3, using programmable pipeline
+// If you are new to ImGui, see examples/README.txt and documentation at the top of imgui.cpp.
 
 #include <imgui.h>
-#include "imgui_impl_glfw_gl3.h"
+#include <vwen/imgui_impl_glfw_gl3.h>
 #include <stdio.h>
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <GLFW/glfw3.h>
-
-#include <iostream>
-#include <cstdio>
-#include <sstream>
-#include <string>
-#include <vector>
-
-using namespace std;
 
 static void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error %d: %s\n", error, description);
 }
 
-static void show_usage(std::string name)
+int main(int, char**)
 {
-    std::cerr << "Usage: " << "" << " <option(s)> SOURCES \n"
-              << "Options:\n"
-              << "\t-h,--help\t\tShow this help message\n"
-              << "\t-d,--destination DESTINATION\tSpecify the destination path"
-              << std::endl;
-}
-
-//int main(int argc, char* argv[])
-int vwen_glfw_gl3(int argc, char* argv[])
-{
-    //using namespace std;
-    //printf("Len = %i \n",argc);
-    /*
-	if (argc < 3) {
-        //printf(string(argc));
-        show_usage(argv[0]);
-        //printf("Len = %f",argc);
-        //return 1;
-    }
-
-    for (int i = 1; i < argc; ++i) {
-        //std::string arg = argv[i];
-        std::string sarg( argv[i] );
-        if ((sarg == "-h") || (sarg == "--help")) {
-            //show_usage(argv[0]);
-            printf("help here?");
-            //return 0;
-        } else if ((sarg == "-d") || (sarg == "--destination")) {
-            if (i + 1 < argc) { // Make sure we aren't at the end of argv!
-                //destination = argv[i++]; // Increment 'i' so we don't get the argument as the next argv[i].
-            } else { // Uh-oh, there was no argument to the destination option.
-                  //std::cerr << "--destination option requires one argument." << std::endl;
-                //return 1;
-            }  
-        }else if(sarg == "-editor"){
-            printf("found editor!");
-        }else if(sarg == "-server"){
-            printf("found server!");
-        }else {
-            //sources.push_back(argv[i]);
-            //printf("default | arg: %s \n",sarg);
-            printf("default\n");
-        }
-    }
-    */
-
     // Setup window
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
@@ -125,9 +67,8 @@ int vwen_glfw_gl3(int argc, char* argv[])
         // 2. Show another simple window, this time using an explicit Begin/End pair
         if (show_another_window)
         {
-            ImGui::SetNextWindowSize(ImVec2(200,100), ImGuiCond_FirstUseEver);
             ImGui::Begin("Another Window", &show_another_window);
-            ImGui::Text("Hello");
+            ImGui::Text("Hello from another window!");
             ImGui::End();
         }
 

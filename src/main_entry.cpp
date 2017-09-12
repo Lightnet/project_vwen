@@ -2,16 +2,16 @@
 	Project: VWEN
 	Information: SDL2 and ImGui
 */
-//#include "vwen_sdl2_gl3.h"
-//#include "vwen_glfw_gl3.h"
-#include "vwen_glfw_glad_cube.h"
+//#include "vwen/vwen_sdl2_gl3.h"
+#include "vwen/vwen_glfw_gl3.h"
+//#include <vwen/vwen_glfw_glad_cube.h>
 
-
-//#undef main
 #include <stdio.h>
 #include <string>
 //#include <cstdio>
 #include <iostream>
+
+//#undef main
 
 using namespace std;
 
@@ -29,7 +29,7 @@ static void show_usage(std::string name)
 			  << "\t-d,-server\t\t(Lanuch Server)\n"
               << std::endl;
 }
-
+/*
 int main(int argc, char* argv[]) //main entry point
 {
 	if (argc < 3) {
@@ -65,8 +65,9 @@ int main(int argc, char* argv[]) //main entry point
 	}
 	
 	//vwen_sdl2_gl3(argc, argv);
-    //vwen_glfw_gl3(argc, argv);
-    vwen_glfw_glad_cube(argc, argv);
+    vwen_glfw_gl3(argc, argv);
+    //vwen_glfw_glad_cube(argc, argv);
 
     return 0;
 }
+*/

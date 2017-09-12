@@ -5,21 +5,40 @@
 
 */
 
-//#include <imgui.h>
-//#include "imgui_impl_glfw_gl3.h"
-#include <stdio.h>
-//#include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
-#include <glad/glad.h>
+#include <imgui.h>
+#include "imgui_impl_glfw_glad.h"
+
+#include <glad/glad.h> // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <GLFW/glfw3.h>
 //#include <GLFW/glfw3native.h>
 
-//#include <glad/glad.h>
 #include "linmath.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string>
-//#include <vector>
 #include "linmath.h"
+
+GLuint vbo;
+
+
+bool firstMouse = true;
+bool guiIsOpen = true;
+bool renderReset = false;
+
+int frameCounter = 0;
+int sphereCount;
+
+GLuint renderWidth = 1280;
+GLuint renderHeight = 720;
+GLuint renderSamples = 4;
+GLuint renderBounces = 4;
+GLuint renderVBO;
+
+GLfloat deltaTime = 0.0f;
+GLfloat lastFrame = 0.0f;
+GLfloat lastPosX = renderWidth / 2;
+GLfloat lastPosY = renderHeight / 2;
+
 
 
 static const struct
@@ -58,8 +77,6 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
         glfwSetWindowShouldClose(window, GLFW_TRUE);
 }
 
-
-
 using namespace std;
 
 //static void error_callback(int error, const char* description)
@@ -77,6 +94,31 @@ static void show_usage(std::string name)
               << std::endl;
               */
 }
+
+
+//https://github.com/JoshuaSenouf/LumenEngine/blob/cuda/src/renderer/renderer.cpp
+void resetRender()
+{
+    //cleanCUDAData();
+    //frameCounter = 0;
+    //initCUDAData();
+
+    //renderReset = false;
+}
+
+void displayGLBuffer() // Currently using the old OpenGL pipeline, should switch to using actual VAO/VBOs and a shader in order to render to a framebuffer and display the result
+{
+    //glBindBuffer(GL_ARRAY_BUFFER, renderVBO);
+    glVertexPointer(2, GL_FLOAT, 12, 0);
+    glColorPointer(4, GL_UNSIGNED_BYTE, 12, (GLvoid*)8);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    //glDrawArrays(GL_POINTS, 0, renderWidth * renderHeight);
+    glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+
 
 //int main(int argc, char* argv[])
 int vwen_glfw_glad_cube(int argc, char* argv[])
@@ -123,30 +165,29 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
     if (!glfwInit())
         return 1;
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     //glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 #if __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
     GLFWwindow* window = glfwCreateWindow(1280, 720, "ImGui OpenGL3 example", NULL, NULL);
-
-    // Setup ImGui binding
-    //ImGui_ImplGlfwGL3_Init(window, true);
-
-
-    GLuint vertex_buffer, vertex_shader, fragment_shader, program;
-    GLint mvp_location, vpos_location, vcol_location;
-
-
     glfwMakeContextCurrent(window);
-    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+
     glfwSwapInterval(1); // Enable vsync
+
+    //gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    gladLoadGL();
 
     //bool show_test_window = true;
     //bool show_another_window = false;
     //ImVec4 clear_color = ImColor(114, 144, 154);
 
+
+    GLuint vertex_buffer, vertex_shader, fragment_shader, program;
+    GLint mvp_location, vpos_location, vcol_location;
+
     // NOTE: OpenGL error checks have been omitted for brevity
+    /*
     glGenBuffers(1, &vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
@@ -169,27 +210,36 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
     glEnableVertexAttribArray(vcol_location);
     glVertexAttribPointer(vcol_location, 3, GL_FLOAT, GL_FALSE,
                           sizeof(float) * 5, (void*) (sizeof(float) * 2));
+    */
+    // Setup ImGui binding
+    ImGui_ImplGlfwGL3_Init(window, true);
 
+    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    printf("Start Loop");
     // Main loop
-
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        //ImGui_ImplGlfwGL3_NewFrame();
+        
+        ImGui_ImplGlfwGL3_NewFrame();
+
+        //ImGuiIO& io = ImGui::GetIO();
 
         float ratio;
         int width, height;
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        //glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        //glClear(GL_COLOR_BUFFER_BIT);
 
         // 1. Show a simple window
         // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
         {
             //static float f = 0.0f;
-            //ImGui::Text("Hello, world!");
-            //ImGui::End();
+            ImGui::Text("Hello, world!");
+            ImGui::End();
         }
-        
+        //resetRender();
+        /*
         mat4x4 m, p, mvp;
         glfwGetFramebufferSize(window, &width, &height);
         ratio = width / (float) height;
@@ -197,21 +247,31 @@ int vwen_glfw_glad_cube(int argc, char* argv[])
         glClear(GL_COLOR_BUFFER_BIT);
         mat4x4_identity(m);
         mat4x4_rotate_Z(m, m, (float) glfwGetTime());
+        mat4x4_rotate_Y(m, m, (float) glfwGetTime());
         mat4x4_ortho(p, -ratio, ratio, -1.f, 1.f, 1.f, -1.f);
         mat4x4_mul(mvp, p, m);
         glUseProgram(program);
         glUniformMatrix4fv(mvp_location, 1, GL_FALSE, (const GLfloat*) mvp);
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        //ImGui::Render();
+        */
+        //glBindVertexArray(0);
+
+        //glBindVertexArray(VAO);
+
+        //displayGLBuffer(); // Display the data inside the VBO
+        ImGui::Render();
+        //glfwSwapBuffers(window);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glfwSwapBuffers(window);
-        glfwPollEvents();
+        //glfwPollEvents();
     }
 
     // Cleanup
     glfwDestroyWindow(window);
     glfwTerminate();
-    //ImGui_ImplGlfwGL3_Shutdown();
+    ImGui_ImplGlfwGL3_Shutdown();
     glfwTerminate();
 
     return 0;
 }
+
