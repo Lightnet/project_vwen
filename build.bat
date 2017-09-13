@@ -1,3 +1,3 @@
 @echo off
-call scons mode=debug
+call scons
 pause

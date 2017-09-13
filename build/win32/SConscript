@@ -8,7 +8,10 @@ Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_
 print("**** Sub Script win32 Config Build")
 #print(env)
 
-env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE'])
+env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #work here
+#env.Append(LINKFLAGS=['/NODEFAULTLIB:library']) #does not work here
+
+#/NODEFAULTLIB:library
 env.AppendUnique(CXXFLAGS=["/MD","/EHsc"])
 
 #env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #SDL2 need this

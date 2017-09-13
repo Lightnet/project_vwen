@@ -7,7 +7,7 @@
 
 #include <imgui.h>
 //#include "vwen/imgui_impl_glfw_gl3.h"
-#include "imgui_impl_glfw_gl.h"
+#include "imgui_impl_glfw_glad.h"
 
 #include <vwen/linmath.h>
 
@@ -51,7 +51,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 
-int vwen_glfw_gl_imgui(int argc, char* argv[])
+int vwen_glfw_glad_imgui(int argc, char* argv[])
 {
     GLuint vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;
@@ -149,12 +149,10 @@ int vwen_glfw_gl_imgui(int argc, char* argv[])
     // VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
     glBindVertexArray(0); 
 
-
-
-
+    
     printf("init imgui\n");
     // Setup ImGui binding
-    ImGui_ImplGlfwGL_Init(window, true);
+    ImGui_ImplGlfwGLad_Init(window, true);
 
     // Load Fonts
     // (there is a default font, this is only if you want to change it. see extra_fonts/README.txt for more details)
@@ -181,9 +179,8 @@ int vwen_glfw_gl_imgui(int argc, char* argv[])
     {
 
         //glClear(GL_COLOR_BUFFER_BIT);
-
         glfwPollEvents();
-        ImGui_ImplGlfwGL_NewFrame();
+        ImGui_ImplGlfwGLad_NewFrame();
         
         // 1. Show a simple window
         // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
@@ -212,8 +209,6 @@ int vwen_glfw_gl_imgui(int argc, char* argv[])
             ImGui::ShowTestWindow(&show_test_window);
         }
         
-
-
         // Rendering
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -229,20 +224,14 @@ int vwen_glfw_gl_imgui(int argc, char* argv[])
         glUseProgram(shaderProgram);
         glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
         glDrawArrays(GL_TRIANGLES, 0, 3);
-        // glBindVertexArray(0); // no need to unbind it every time 
 
-
-        //glClearColor(clear_color.x, clear_color.y, clear_color.z, clear_color.w);
-        //glClear(GL_COLOR_BUFFER_BIT);
-        //printf("render\n");
-        //glfwMakeContextCurrent(window);
-        //glBindVertexArray(vao);
+        //render imgui
         ImGui::Render();
         glfwSwapBuffers(window);
     }
 
     // Cleanup
-    ImGui_ImplGlfwGL_Shutdown();
+    ImGui_ImplGlfwGLad_Shutdown();
     glfwTerminate();
 
     return 0;

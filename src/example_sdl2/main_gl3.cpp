@@ -11,9 +11,6 @@
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
 
-#include <editor.h>
-
-
 //int main(int, char**) //main entry point
 int main_gl3(int, char**) //main entry point
 {
@@ -23,8 +20,6 @@ int main_gl3(int, char**) //main entry point
         printf("Error: %s\n", SDL_GetError());
         return -1;
     }
-
-    NodeInit();
 
     // Setup window
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
