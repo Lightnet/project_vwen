@@ -3,7 +3,8 @@
 	Information: SDL2 and ImGui
 */
 //#include "vwen/vwen_sdl2_gl3.h"
-#include <vwen_glfw_gl3.h>
+//#include "vwen_glfw_gl3_imgui.h"
+#include "vwen_glfw_gl_imgui.h"
 //#include <vwen/vwen_glfw_glad_cube.h>
 
 #include <stdio.h>
@@ -66,7 +67,8 @@ int main(int argc, char* argv[]) //main entry point
 	}
 	
 	//vwen_sdl2_gl3(argc, argv);
-    vwen_glfw_gl3(argc, argv);
+    //vwen_glfw_gl3_imgui(argc, argv);
+    vwen_glfw_gl_imgui(argc, argv);
     //vwen_glfw_glad_cube(argc, argv);
 
     return 0;

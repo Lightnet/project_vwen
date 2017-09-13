@@ -8,40 +8,25 @@
 #include <imgui.h>
 //#include "vwen/imgui_impl_glfw_gl3.h"
 #include "imgui_impl_glfw_gl3.h"
-#include <stdio.h>
+
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <GLFW/glfw3.h>
 
-/*
-#include <imgui.h>
-#include "imgui_impl_glfw_gl3.h"
 #include <stdio.h>
-#include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
-#include <GLFW/glfw3.h>
-
 #include <iostream>
-#include <cstdio>
 #include <sstream>
 #include <string>
 #include <vector>
-*/
-//using namespace std;
+
+using namespace std;
 
 static void error_callback(int error, const char* description)
 {
     fprintf(stderr, "Error %d: %s\n", error, description);
 }
-/*
-static void show_usage(std::string name)
-{
-    std::cerr << "Usage: " << "" << " <option(s)> SOURCES \n"
-              << "Options:\n"
-              << "\t-h,--help\t\tShow this help message\n"
-              << "\t-d,--destination DESTINATION\tSpecify the destination path"
-              << std::endl;
-}
-*/
-int vwen_glfw_gl3(int argc, char* argv[])
+
+
+int vwen_glfw_gl3_imgui(int argc, char* argv[])
 {
     // Setup window
     glfwSetErrorCallback(error_callback);
