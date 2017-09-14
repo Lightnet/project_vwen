@@ -1,1 +1,1 @@
-int sdl_glad_imgui(int argc, char* argv[]);
+int sdl2_glad_imgui(int argc, char* argv[]);

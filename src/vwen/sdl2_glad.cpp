@@ -1,16 +1,13 @@
+/*
+	Project: VWEN
 
+	Information: Simple SDL2 Glad Gl render triangle
 
+*/
 
-#include <imgui.h>
-#include "imgui_impl_sdl2_glad.h"
-
-#include <cstdio>
-#include <cstdlib>
-
+#include <stdio.h>
+#include <glad/glad.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <SDL.h>
-#include "glad/glad.h"
-
-#undef main
 
 // Window management
 bool quit = false; // exit program
@@ -33,8 +30,8 @@ GLuint VBO; // vertex buffer object
 
 GLuint vertices = 3;
 GLfloat vVertices[] = {0.0f, -0.5f, 0.0f,
-											 -0.5f, 0.5f, 0.0f,
-												0.5f, 0.5f, 0.0f};
+                       -0.5f, 0.5f, 0.0f,
+                        0.5f, 0.5f, 0.0f};
 
 void _sdlError(const char *mes)
 {
@@ -52,16 +49,16 @@ void Init()
 	SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 5);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
+	//SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
 
-	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+	//SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+	//SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
 	// Create window
 	window = SDL_CreateWindow(title, initialPosX, initialPosY, wWidth, wHeight, SDL_WINDOW_OPENGL);
 	if(window == NULL)
 		_sdlError("Could not create window");
-
-	ImGui_ImplSdlGLad_Init(window);
 
 	// Create OpenGL context
 	glContext = SDL_GL_CreateContext(window);
@@ -69,7 +66,9 @@ void Init()
 		_sdlError("Could not create the OpenGL context");
 
 	// Load OpenGL functions glad SDL
-	gladLoadGLLoader(SDL_GL_GetProcAddress);
+	//gladLoadGLLoader(SDL_GL_GetProcAddress);
+	//gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+	gladLoadGLLoader((GLADloadproc) SDL_GL_GetProcAddress);
 
 	// V-Sync
 	SDL_GL_SetSwapInterval(1);
@@ -85,20 +84,20 @@ void PreLoop()
 
 void LoadShaders()
 {
-// Shaders
+  // Shaders
 const char* vertexShaderSource = "#version 450 core\n"
-		"layout (location = 0) in vec3 position;\n"
-		"void main()\n"
-		"{\n"
-		"gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
-		"}\0";
+    "layout (location = 0) in vec3 position;\n"
+    "void main()\n"
+    "{\n"
+    "gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"
+    "}\0";
 const char* fragmentShaderSource = "#version 450 core\n"
-		"out vec4 color;\n"
-		"void main()\n"
-		"{\n"
-		"color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
-		"}\n\0";
-	
+    "out vec4 color;\n"
+    "void main()\n"
+    "{\n"
+    "color = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n"
+    "}\n\0";
+  
 	// Build compile VERTEX_SHADER
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
@@ -169,12 +168,11 @@ void OpenGLSet() // set up OpenGL
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);
 
-	 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0); // ?
 	glBindVertexArray(0);
-	
 }
 
 void DeleteGLTrash()
@@ -189,61 +187,40 @@ void DeleteSDLTrash()
 	SDL_DestroyWindow(window);
 }
 
-int sdl2_glad_imgui(int argc, char* argv[])
+int sdl2_glad(int argc, char* argv[]) //main
 {
-	Init(); // Init SDL2 Glad
-	
-	PreLoop(); // To do before loop (display graphics card info)
-	
-	OpenGLSet(); // set up OpenGL
-	
-	bool show_test_window = true;
-	bool show_another_window = false;
-	ImVec4 clear_color = ImColor(114, 144, 154);
-		
-	// Main loop
+    Init(); // Init SDL2 Glad
+    PreLoop(); // To do before loop (display graphics card info)
+
+    OpenGLSet(); // set up OpenGL
+
+    bool show_test_window = true;
+    bool show_another_window = false;
+    //ImVec4 clear_color = ImColor(114, 144, 154);
+    printf("loop\n");
+     // Main loop
 	while(!quit)
 	{
 		glClearColor(0.4f, 0.2f, 0.2f, 1.0f); // Clear the color buffer
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		ImGui_ImplSdlGLad_NewFrame(window);
-	
-		{
-			static float f = 0.0f;
-			ImGui::Text("Hello, world!");
-			ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-			ImGui::ColorEdit3("clear color", (float*)&clear_color);
-			//if (ImGui::Button("Test Window"))
-			//{
-					//show_test_window ^= 1;
-					//printf("Window Click\n");
-			//}
-			//if (ImGui::Button("Another Window")) show_another_window ^= 1;
-			ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		}
 
 		// Draw functions
 		glUseProgram(shaderProgram);
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, vertices);
 		glBindVertexArray(0);
-	
-		ImGui::Render();
 		
 		SDL_GL_SwapWindow(window); // swap buffers
 		while(SDL_PollEvent(&event)) // handle events
 		{
-			ImGui_ImplSdlGLad_ProcessEvent(&event);
 			if(event.type == SDL_QUIT)
 				quit = true;
 		}
 	}
-
-	ImGui_ImplSdlGLad_Shutdown();
 	// To do before exit the program
 	DeleteGLTrash();
 	DeleteSDLTrash();
 	SDL_Quit();
-	
-	return 0;
+
+    return 0;
 }

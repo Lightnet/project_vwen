@@ -1,0 +1,1 @@
+int sdl2_glad(int argc, char* argv[]);

@@ -107,7 +107,7 @@ void displayGLBuffer() // Currently using the old OpenGL pipeline, should switch
 
 
 //int main(int argc, char* argv[])
-int vwen_glfw_glad_cube(int argc, char* argv[])
+int glfw_glad_cube(int argc, char* argv[])
 {
    
     // Setup window

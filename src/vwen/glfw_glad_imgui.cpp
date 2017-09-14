@@ -6,7 +6,6 @@
 */
 
 #include <imgui.h>
-//#include "vwen/imgui_impl_glfw_gl3.h"
 #include "imgui_impl_glfw_glad.h"
 
 #include <vwen/linmath.h>
@@ -51,7 +50,7 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
 }
 
 
-int vwen_glfw_glad_imgui(int argc, char* argv[])
+int glfw_glad_imgui(int argc, char* argv[])
 {
     GLuint vertex_buffer, vertex_shader, fragment_shader, program;
     GLint mvp_location, vpos_location, vcol_location;

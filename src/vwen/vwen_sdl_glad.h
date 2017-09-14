@@ -1,1 +1,0 @@
-int vwen_sdl_glad(int argc, char* argv[]);

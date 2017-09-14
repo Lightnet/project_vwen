@@ -6,7 +6,7 @@
 */
 
 #include <imgui.h>
-#include "imgui_impl_glfw_gl3w.h"
+#include "imgui_impl_glfw_glad.h"
 #include <stdio.h>
 #include <GL/gl3w.h>    // This example is using gl3w to access OpenGL functions (because it is small). You may use glew/glad/glLoadGen/etc. whatever already works for you.
 #include <GLFW/glfw3.h>
@@ -71,11 +71,7 @@ int main_glfw(int argc, char* argv[])
             printf("default\n");
         }
     }
-
     //ss = nullptr;
-
-
-
     // Setup window
     glfwSetErrorCallback(error_callback);
     if (!glfwInit())
@@ -92,7 +88,7 @@ int main_glfw(int argc, char* argv[])
     gl3wInit();
 
     // Setup ImGui binding
-    ImGui_ImplGlfwGL3w_Init(window, true);
+    ImGui_ImplGlfwGLad_Init(window, true);
 
     // Load Fonts
     // (there is a default font, this is only if you want to change it. see extra_fonts/README.txt for more details)
@@ -112,7 +108,7 @@ int main_glfw(int argc, char* argv[])
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-        ImGui_ImplGlfwGL3w_NewFrame();
+        ImGui_ImplGlfwGLad_NewFrame();
 
         // 1. Show a simple window
         // Tip: if we don't call ImGui::Begin()/ImGui::End() the widgets appears in a window automatically called "Debug"
@@ -153,7 +149,7 @@ int main_glfw(int argc, char* argv[])
     }
 
     // Cleanup
-    ImGui_ImplGlfwGL3w_Shutdown();
+    ImGui_ImplGlfwGLad_Shutdown();
     glfwTerminate();
 
     return 0;
