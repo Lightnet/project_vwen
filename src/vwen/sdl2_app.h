@@ -1,1 +1,7 @@
-int sdl2_app(int argc, char* argv[]);
+
+
+namespace AppSDL{
+
+    int sdl_app(int argc, char* argv[]);
+
+}

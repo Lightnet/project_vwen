@@ -5,7 +5,6 @@
 
 //#include "vwen/glfw_glad_imgui.h"
 //#include <vwen/glfw_glad_cube.h>
-
 //#include "vwen/sdl2_glad.h"
 //#include "vwen/sdl2_glad_imgui.h"
 //#include "vwen/sdl2_glad_imgui.h"
@@ -71,7 +70,8 @@ int main(int argc, char* argv[]) //main entry point
             printf("default\n");
         }
 	}
-	
+    
+    
 	//sdl2_gl3w(argc, argv);
     //vwen_glfw_gl3_imgui(argc, argv);
     //vwen_glfw_glad_imgui(argc, argv);
@@ -80,7 +80,7 @@ int main(int argc, char* argv[]) //main entry point
     //sdl2_glad(argc,argv);
     //sdl2_glad_imgui(argc,argv);
     //sdl2_launcher(argc,argv);
-    sdl2_app(argc,argv);
+    AppSDL::sdl_app(argc,argv);
 
     return 0;
 }
