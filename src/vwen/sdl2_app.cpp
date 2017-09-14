@@ -203,6 +203,19 @@ namespace AppSDL{
 		bool show_test_window = true;
 		bool show_another_window = false;
 		ImVec4 clear_color = ImColor(114, 144, 154);
+
+		//https://stackoverflow.com/questions/12248703/creating-an-instance-of-class
+		//https://msdn.microsoft.com/en-us/library/5cb46ksf.aspx
+
+		//using Vwen::ObjectNode;
+		//ObjectNode Objnode;
+		//Objnode.DoSomething();
+
+		//using namespace Vwen;
+		//ObjectNode Objnode;
+		//Objnode.DoSomething();
+
+		Vwen::ObjectNode Objnode;
 			
 		// Main loop
 		while(!quit)
@@ -223,7 +236,8 @@ namespace AppSDL{
 				//}
 				if (ImGui::Button("Another Window")){ 
 					show_another_window ^= 1;
-					Vwen::func();
+					//Vwen::func();
+					Objnode.DoSomething();
 				}
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			}

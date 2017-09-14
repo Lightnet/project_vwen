@@ -28,7 +28,7 @@
             "taskName": "Launch Application Release",
             "command": "${workspaceRoot}/${config:output_dir}/${config:development_mode}/${config:output_program}.exe",
             "args": [
-                "-server"
+                ""
             ],
             "problemMatcher": [
                 "$msCompile"
