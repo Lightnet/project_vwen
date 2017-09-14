@@ -17,6 +17,7 @@ Information: By using the Python Scons script or command to compile build for c/
 There are two main packages for testing. SDL2 and GLFW for window application. That is still testing.
 
 Notes:
+ * Same functions from package will cause an error that is in conflict with current dir from script base of same functions scripts. (need to fixed or test for code builds.)
  * `#undef main` SDL2 for main entery point
  * Example files are just test build for api or third parties to check for packages breaking.
  * Firewall or security programs can block builds and compilers.
@@ -51,9 +52,6 @@ Default build VS2017 Window 10 32bit
 [Mac]
 
    `scons` 
-
-Notes:
-
 
 Refs:
   * ...
