@@ -1,0 +1,1 @@
+int sdl2_launcher(int argc, char* argv[]);

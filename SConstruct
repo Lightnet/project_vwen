@@ -69,6 +69,10 @@ env.Install(buildroot,"libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output b
 """
 #-- build execute file
 #-- application
-env.Program(targetpath, Glob(builddir + os.sep + '*.cpp'), LIBS=lib_packages, LIBPATH=['.','src', buildroot, SDL2_LIB_PATH])
+env.Program(targetpath, Glob(builddir + os.sep + '*.cpp'),
+LIBS=lib_packages,
+LIBPATH=['.','src', buildroot, SDL2_LIB_PATH]#,
+#CXXFLAGS=['/NODEFAULTLIB:library']
+)
 
 print("**** Script Finish Here!")

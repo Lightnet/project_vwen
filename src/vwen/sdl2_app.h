@@ -1,0 +1,1 @@
+int sdl2_app(int argc, char* argv[]);
