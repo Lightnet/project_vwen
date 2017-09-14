@@ -2,18 +2,22 @@
 	Project: VWEN
 	Information: SDL2 and ImGui
 */
-//#include "vwen/vwen_sdl2_gl3.h"
-//#include "vwen_glfw_gl3_imgui.h"
-//#include "vwen_glfw_glad_imgui.h"
+//#include "vwen/sdl2_gl3w.h"
+
+//#include "vwen/vwen_glfw_gl3_imgui.h"
+//#include "vwen/vwen_glfw_glad_imgui.h"
+
 //#include <vwen/vwen_glfw_glad_cube.h>
-//#include "vwen_sdl_glad.h"
+
+//#include "vwen/vwen_sdl_glad.h"
+#include "vwen/sdl2_glad_imgui.h"
 
 #include <stdio.h>
 #include <string>
 //#include <cstdio>
 #include <iostream>
 
-//#undef main
+#undef main
 
 using namespace std;
 
@@ -33,7 +37,8 @@ static void show_usage(std::string name)
 }
 //----
 
-int main_test(int argc, char* argv[]) //main entry point
+//int main_test(int argc, char* argv[]) //main entry point
+int main(int argc, char* argv[]) //main entry point
 {
 	if (argc < 3) {
         //printf(string(argc));
@@ -67,12 +72,13 @@ int main_test(int argc, char* argv[]) //main entry point
         }
 	}
 	
-	//vwen_sdl2_gl3(argc, argv);
+	//sdl2_gl3w(argc, argv);
     //vwen_glfw_gl3_imgui(argc, argv);
     //vwen_glfw_glad_imgui(argc, argv);
     //vwen_glfw_glad_cube(argc, argv);
 
     //vwen_sdl_glad(argc,argv);
+    sdl_glad_imgui(argc,argv);
 
     return 0;
 }

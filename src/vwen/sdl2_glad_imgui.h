@@ -1,0 +1,1 @@
+int sdl_glad_imgui(int argc, char* argv[]);

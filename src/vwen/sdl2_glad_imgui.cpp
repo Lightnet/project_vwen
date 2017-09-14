@@ -189,7 +189,7 @@ void DeleteSDLTrash()
   SDL_DestroyWindow(window);
 }
 
-int main()
+int sdl_glad_imgui(int argc, char* argv[])
 {
   Init(); // Init SDL2 Glad
   
