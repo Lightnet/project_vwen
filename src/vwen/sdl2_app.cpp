@@ -163,6 +163,7 @@ namespace AppSDL{
 		SDL_GL_GetDrawableSize(window, &vpWidth, &vpHeight);
 		glViewport(0, 0, vpWidth, vpHeight);
 
+		/*
 		LoadShaders();
 
 		glGenVertexArrays(1, &VAO);
@@ -178,12 +179,13 @@ namespace AppSDL{
 
 		glBindBuffer(GL_ARRAY_BUFFER, 0); // ?
 		glBindVertexArray(0);
+		*/
 	}
 
 	void app_DeleteGLTrash()
 	{
-		glDeleteVertexArrays(1, &VAO);
-		glDeleteBuffers(1, &VBO);
+		//glDeleteVertexArrays(1, &VAO);
+		//glDeleteBuffers(1, &VBO);
 	}
 
 	void app_DeleteSDLTrash()
@@ -217,6 +219,8 @@ namespace AppSDL{
 
 		//Vwen::ObjectNode Objnode;
 		Vwen::ObjectNode2D Objnode;
+
+		Vwen::PolygonGL PolyGL;
 			
 		// Main loop
 		while(!quit)
@@ -239,15 +243,19 @@ namespace AppSDL{
 					show_another_window ^= 1;
 					//Vwen::func();
 					Objnode.DoSomething();
+
+					//PolyGL.Render();
 				}
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			}
 
+			PolyGL.Render();
+
 			// Draw functions
-			glUseProgram(shaderProgram);
-			glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, vertices);
-			glBindVertexArray(0);
+			//glUseProgram(shaderProgram);
+			//glBindVertexArray(VAO);
+			//glDrawArrays(GL_TRIANGLES, 0, vertices);
+			//glBindVertexArray(0);
 		
 			ImGui::Render();
 			
