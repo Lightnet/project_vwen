@@ -2,6 +2,7 @@
     "python.linting.pylintEnabled": false,
     "files.associations": {
         "SConstruct": "python",
+        "SConscript": "python",
         "iostream": "cpp",
         "string": "cpp",
         "cmath": "cpp",
@@ -47,7 +48,10 @@
         "tuple": "cpp",
         "unordered_map": "cpp",
         "xfunctional": "cpp",
-        "xhash": "cpp"
+        "xhash": "cpp",
+        "array": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp"
     },
     "development_mode":"release",       //development build mode
     "output_dir":"bin",                 //out put bin builds

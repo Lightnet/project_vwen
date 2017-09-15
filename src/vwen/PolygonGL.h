@@ -2,9 +2,11 @@
 
 
 #include "glad/glad.h"
+#include <array>
 #include <iostream>
 #include <cstdio>
 #include <cstdlib>
+
 using namespace std;
 
 namespace Vwen{
@@ -92,30 +94,52 @@ namespace Vwen{
                 glDeleteShader(fragmentShader);
             }
 
-            void OpenGLSet(GLfloat _vVertices[]) // set up OpenGL
+            //void OpenGLSet(GLfloat _vVertices[]) // set up OpenGL
+            void OpenGLSet(int _size,float _vVertices[],int _len) // set up OpenGL
             {
         
                 LoadShaders();
-                GLfloat vVertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
-        
+
+                std::cout << " OpenGLSet Length of array = " <<  sizeof(_vVertices) << std::endl;
+
+                float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
+
+                const int size = sizeof(_vVertices);
+
+                float verts[size];
+
+                std::copy(verts, verts + _len, _vVertices);
+
+
+                for(int i=0; i<_len; i++){
+                    verts[i] = Vertices[i];
+                    cout << "vVertices GL"<< verts[i] << endl;
+                }
+
+
+                //std::memcpy();
                 glGenVertexArrays(1, &VAO);
                 glGenBuffers(1, &VBO);
                 // Bind the Vertex Array Object first, then bind and set Vertex Buffers and attribute pointers
                 glBindVertexArray(VAO);
-
-                //for(int i=0; i<9; i++){
-                    //vVertices[i]=vector3[i];
-                    //cout << "vVertices GL"<< vVertices[i] << endl;
-                //}
-        
+                //std::array<const float,9> vVertices = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
+                //float vVertices[] = _vVertices;
+                //GLfloat vVertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
                 glBindBuffer(GL_ARRAY_BUFFER, VBO);
-                glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);
+                glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+
+                //glBufferData(GL_ARRAY_BUFFER, sizeof(_vVertices), _vVertices, GL_STATIC_DRAW);
+                //glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);//default
+                //glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_DYNAMIC_DRAW);
+                //glBufferData(GL_ARRAY_BUFFER, sizeof(_vVertices), _vVertices, GL_DYNAMIC_DRAW);
         
                 glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3*sizeof(GLfloat), (GLvoid*)0);
                 glEnableVertexAttribArray(0);
         
                 glBindBuffer(GL_ARRAY_BUFFER, 0); // ?
                 glBindVertexArray(0);
+
+                //delete [] vVertices;
             }
 
             void DeleteGLTrash()
@@ -147,11 +171,14 @@ namespace Vwen{
             PolygonGL()
             {
                 
-                GLfloat Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
-
-                OpenGLSet(Vertices);
-
-
+                //GLfloat Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
+                float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
+                //int size =  (sizeof(Vertices)/sizeof(Vertices[0]));
+                int len = (sizeof(Vertices)/sizeof(Vertices[0]));
+                int size = sizeof(Vertices);
+                //std::cout << "Length of array = " <<  (sizeof(Vertices)/sizeof(Vertices[0])) << std::endl;
+                std::cout << "Length of array = " <<  sizeof(Vertices) << std::endl;
+                OpenGLSet(size,Vertices,len);
                 cout << "Setup GL" << endl;
             }
     };
