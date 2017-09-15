@@ -215,7 +215,8 @@ namespace AppSDL{
 		//ObjectNode Objnode;
 		//Objnode.DoSomething();
 
-		Vwen::ObjectNode Objnode;
+		//Vwen::ObjectNode Objnode;
+		Vwen::ObjectNode2D Objnode;
 			
 		// Main loop
 		while(!quit)

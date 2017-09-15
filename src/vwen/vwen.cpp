@@ -10,9 +10,9 @@ using namespace std;
 
 namespace Vwen{
 
-    void ObjectNode::DoSomething(){
-        cout << "Inside namespace vwen of ObjectNode" << endl;
-    }
+    //void ObjectNode::DoSomething(){
+        //cout << "Inside namespace vwen of ObjectNode" << endl;
+    //}
 
 }
 
