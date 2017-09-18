@@ -8,7 +8,7 @@ Notes:
 //#include <iostream>
 //using namespace std;
 
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 #include "ObjectNode.h"
 #include "ObjectNode2D.h"

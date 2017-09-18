@@ -8,7 +8,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <SDL.h>
-#include "glad/glad.h"
+#include <glad/glad.h>
 
 #include "vwen/vwen.h"
 
@@ -218,7 +218,7 @@ namespace AppSDL{
 		//Objnode.DoSomething();
 
 		//Vwen::ObjectNode Objnode;
-		Vwen::ObjectNode2D Objnode;
+		//Vwen::ObjectNode2D Objnode;
 
 		Vwen::PolygonGL PolyGL;
 			
@@ -227,8 +227,9 @@ namespace AppSDL{
 		{
 			glClearColor(0.4f, 0.2f, 0.2f, 1.0f); // Clear the color buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 			ImGui_ImplSdlGLad_NewFrame(window);
-		
+			
 			{
 				static float f = 0.0f;
 				ImGui::Text("Hello, world!");
@@ -242,12 +243,13 @@ namespace AppSDL{
 				if (ImGui::Button("Another Window")){ 
 					show_another_window ^= 1;
 					//Vwen::func();
-					Objnode.DoSomething();
+					//Objnode.DoSomething();
 
 					//PolyGL.Render();
 				}
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			}
+			
 
 			PolyGL.Render();
 

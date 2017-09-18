@@ -1,7 +1,5 @@
 
 
-
-#include "glad/glad.h"
 #include <array>
 #include <iostream>
 #include <cstdio>
@@ -95,28 +93,20 @@ namespace Vwen{
             }
 
             //void OpenGLSet(GLfloat _vVertices[]) // set up OpenGL
-            void OpenGLSet(int _size,float _vVertices[],int _len) // set up OpenGL
+            void OpenGLSet() // set up OpenGL
             {
-        
                 LoadShaders();
-
-                std::cout << " OpenGLSet Length of array = " <<  sizeof(_vVertices) << std::endl;
-
+                //std::cout << " OpenGLSet Length of array = " <<  sizeof(_vVertices) << std::endl;
                 float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
-
-                const int size = sizeof(_vVertices);
-
-                float verts[size];
-
-                std::copy(verts, verts + _len, _vVertices);
-
-
-                for(int i=0; i<_len; i++){
-                    verts[i] = Vertices[i];
-                    cout << "vVertices GL"<< verts[i] << endl;
-                }
-
-
+                //int _len = (sizeof(Vertices)/sizeof(Vertices[0]));
+                //std::cout << " OpenGLSet Length of array = " <<  _len << std::endl;
+                //const int size = sizeof(Vertices);
+                //float verts[size];
+                //std::copy(verts, verts + _len, Vertices);
+                //for(int i=0; i<_len; i++){
+                    //verts[i] = Vertices[i];
+                    //cout << "vVertices GL"<< verts[i] << endl;
+                //}
                 //std::memcpy();
                 glGenVertexArrays(1, &VAO);
                 glGenBuffers(1, &VBO);
@@ -126,7 +116,9 @@ namespace Vwen{
                 //float vVertices[] = _vVertices;
                 //GLfloat vVertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
                 glBindBuffer(GL_ARRAY_BUFFER, VBO);
-                glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+                //glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
+
+                glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 
                 //glBufferData(GL_ARRAY_BUFFER, sizeof(_vVertices), _vVertices, GL_STATIC_DRAW);
                 //glBufferData(GL_ARRAY_BUFFER, sizeof(vVertices), vVertices, GL_STATIC_DRAW);//default
@@ -172,13 +164,13 @@ namespace Vwen{
             {
                 
                 //GLfloat Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
-                float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
+                //float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
                 //int size =  (sizeof(Vertices)/sizeof(Vertices[0]));
-                int len = (sizeof(Vertices)/sizeof(Vertices[0]));
-                int size = sizeof(Vertices);
+                //int len = (sizeof(Vertices)/sizeof(Vertices[0]));
+                //int size = sizeof(Vertices);
                 //std::cout << "Length of array = " <<  (sizeof(Vertices)/sizeof(Vertices[0])) << std::endl;
-                std::cout << "Length of array = " <<  sizeof(Vertices) << std::endl;
-                OpenGLSet(size,Vertices,len);
+                //std::cout << "Length of array = " <<  sizeof(Vertices) << std::endl;
+                OpenGLSet();
                 cout << "Setup GL" << endl;
             }
     };

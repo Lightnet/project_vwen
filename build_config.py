@@ -33,9 +33,15 @@ include_packages = []
 include_packages.append(SDL2_INCLUDE_PATH)
 include_packages.append(CURRENT_DIR + os.sep +'src')
 include_packages.append(CURRENT_DIR + os.sep +'vwen')
-include_packages.append(CURRENT_DIR + os.sep +'src\\glad')
-include_packages.append(CURRENT_DIR + os.sep +'libs\\gl3w')
-include_packages.append(CURRENT_DIR + os.sep +'libs\\glfw\\include')
+
+include_packages.append(CURRENT_DIR + os.sep +'api\\gl3w')
+include_packages.append(CURRENT_DIR + os.sep +'api\\glfw\\include')
+
+include_packages.append(CURRENT_DIR + os.sep +'api\\include')
+include_packages.append(CURRENT_DIR + os.sep +'api\\include\\glad')
+include_packages.append(CURRENT_DIR + os.sep +'api\\include\\imgui')
+
+
 #include_packages.append(SRC_PATH)
 #include_packages.append(IMGUI_PATH)
 
@@ -44,7 +50,7 @@ include_packages.append(CURRENT_DIR + os.sep +'libs\\glfw\\include')
 core_packages = []
 
 core_packages.append('vwen')
-core_packages.append('imgui')
+#core_packages.append('imgui')
 #core_packages.append('glad')
 #core_packages.append('glm')
 #core_packages.append('core')
@@ -55,7 +61,7 @@ core_packages.append('imgui')
 
 #third parties packages
 lib_packages = []
-#lib_packages.append('imgui')
+lib_packages.append('imgui')
 lib_packages.append('opengl32')
 lib_packages.append('gl3w')
 lib_packages.append('glfw3')
