@@ -30,15 +30,15 @@ target_name = 'project_vwen'
 #--include files
 include_packages = []
 #include_packages.append(SDL2_INCLUDE_PATH)
-include_packages.append(CURRENT_DIR + os.sep +'src')
-include_packages.append(CURRENT_DIR + os.sep +'vwen')
+#include_packages.append(CURRENT_DIR + os.sep +'src')
+#include_packages.append(CURRENT_DIR + os.sep +'vwen')
 
 #include_packages.append(CURRENT_DIR + os.sep +'api\\gl3w')
 #include_packages.append(CURRENT_DIR + os.sep +'api\\glfw\\include')
 
-include_packages.append(CURRENT_DIR + os.sep +'api/include')
-include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
-include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
+#include_packages.append(CURRENT_DIR + os.sep +'api/include')
+#include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
+#include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
 
 #include_packages.append('C:\\Python27\\include')
 #include_packages.append(CURRENT_DIR + os.sep +'api\\include\\pybind11')
@@ -50,7 +50,7 @@ include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
 #--engine node packages
 core_packages = []
 
-core_packages.append('vwen')
+#core_packages.append('vwen')
 #core_packages.append('imgui')
 #core_packages.append('glad')
 #core_packages.append('glm')
@@ -63,17 +63,16 @@ core_packages.append('vwen')
 #third parties packages
 lib_packages = []
 #lib_packages.append('glm')
-lib_packages.append('imgui')
+#lib_packages.append('imgui')
+#lib_packages.append('glad')
+#lib_packages.append('SDL2main')
+#lib_packages.append('SDL2')
 #lib_packages.append('opengl32')
 #lib_packages.append('gl3w')
 #lib_packages.append('glfw3')
-lib_packages.append('glad')
-lib_packages.append('SDL2main')
-lib_packages.append('SDL2')
 #lib_packages.append('SDL2test')
-
 #lib_packages.append('python27')
 
 #--add list
-lib_packages += core_packages
-include_packages +=core_packages
+#lib_packages += core_packages
+#include_packages +=core_packages

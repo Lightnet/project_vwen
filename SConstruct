@@ -43,7 +43,7 @@ else:
 
 # variables the sub build directories need
 #Export('env', 'sources', 'static_libs', 'test_sources')
-Export('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH')
+Export('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH','buildroot','targetpath','builddir','lib_packages')
 
 # build path checks
 target_dir = '#' + SelectBuildDir(build_base_dir)
@@ -75,10 +75,11 @@ env.Install(buildroot,"libs\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output b
 """
 #-- build execute file
 #-- application
+"""
 env.Program(targetpath, Glob(builddir + os.sep + '*.cpp'),
 LIBS=lib_packages,
 LIBPATH=['.','src', buildroot, SDL2_LIB_PATH]#,
 #CXXFLAGS=['/NODEFAULTLIB:library']
 )
-
+"""
 print("**** Script Finish Here!")

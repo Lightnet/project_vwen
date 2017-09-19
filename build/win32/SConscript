@@ -3,13 +3,34 @@ import os
 
 # import these variables from the parent build script
 #Import('env', 'sources', 'static_libs', 'test_sources')
-Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH')
+Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH','buildroot','targetpath','builddir','lib_packages')
 
 SDL2_LIB_PATH = 'C:\\SDL2-2.0.5\\lib\\x86'
 SDL2_INCLUDE_PATH = 'C:\\SDL2-2.0.5\\include'
 
 print("**** Sub Script win32 Config Build")
 #print(env)
+
+
+include_packages.append(CURRENT_DIR + os.sep +'src')
+include_packages.append(CURRENT_DIR + os.sep +'vwen')
+
+include_packages.append(CURRENT_DIR + os.sep +'api/include')
+include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
+include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
+
+core_packages.append('vwen')
+
+lib_packages.append('imgui')
+lib_packages.append('glad')
+lib_packages.append('SDL2main')
+lib_packages.append('SDL2')
+
+#--add list
+lib_packages += core_packages
+include_packages +=core_packages
+
+
 
 env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #work here
 #env.Append(LINKFLAGS=['/NODEFAULTLIB:library']) #does not work here
@@ -60,3 +81,9 @@ env.Install(CURRENT_DIR + os.sep + buildroot,"C:\\SDL2-2.0.5\\lib\\x86\\SDL2.dll
 #print("Main:",builddir + os.sep + '*.cpp')
 
 Export('SDL2_LIB_PATH','SDL2_INCLUDE_PATH')
+
+env.Program(CURRENT_DIR + os.sep +targetpath, Glob(CURRENT_DIR + os.sep +builddir + os.sep + '*.cpp'),
+LIBS=lib_packages,
+LIBPATH=['.',CURRENT_DIR + os.sep + 'src', CURRENT_DIR + os.sep + buildroot, SDL2_LIB_PATH]#,
+#CXXFLAGS=['/NODEFAULTLIB:library']
+)
