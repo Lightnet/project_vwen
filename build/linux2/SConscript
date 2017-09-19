@@ -76,3 +76,9 @@ env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy 
 #print("Bin:")
 #print(buildroot)
 #print("Main:",builddir + os.sep + '*.cpp')
+
+env.Program(CURRENT_DIR + os.sep +targetpath, Glob(CURRENT_DIR + os.sep +builddir + os.sep + '*.cpp'),
+LIBS=lib_packages,
+LIBPATH=['.',CURRENT_DIR + os.sep + 'src', CURRENT_DIR + os.sep + buildroot, SDL2_LIB_PATH]#,
+#CXXFLAGS=['/NODEFAULTLIB:library']
+)
