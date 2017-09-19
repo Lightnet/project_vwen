@@ -13,7 +13,7 @@ print("**** Sub Script win32 Config Build")
 
 
 include_packages.append(CURRENT_DIR + os.sep +'src')
-include_packages.append(CURRENT_DIR + os.sep +'vwen')
+include_packages.append(CURRENT_DIR + os.sep +'src/vwen')
 
 include_packages.append(CURRENT_DIR + os.sep +'api/include')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
