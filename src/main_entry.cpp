@@ -7,6 +7,8 @@
 #include <glm/mat4x4.hpp> // glm::mat4
 #include <glm/gtc/matrix_transform.hpp> // glm::translate, glm::rotate, glm::scale, glm::perspective
 
+#include <pybind11/embed.h>
+
 //#include "vwen/glfw_glad_imgui.h"
 //#include <vwen/glfw_glad_cube.h>
 //#include "vwen/sdl2_glad.h"

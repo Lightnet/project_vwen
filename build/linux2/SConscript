@@ -24,11 +24,10 @@ env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
 #build lib file
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR + os.sep +'src\\vwen\\*.cpp')) #Gl3w
-#--python
-env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'python27' , ['C:\\Python27\\libs\\python27.lib'])
+
 #--gl
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api\\include\\glad\\*.c')) #Gl3w
-env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #Gl3w
+#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #Gl3w
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api\\include\\imgui\\*.cpp")) #imgui
