@@ -22,6 +22,8 @@ for basename in core_packages:
 	include_packages.append(CURRENT_DIR + os.sep + SRC_PATH + os.sep + basename) #header file basefile.h
 	#pass
 #print("Include:")
+include_packages.append('/user/include/c++/6')
+include_packages.append(SDL2_INCLUDE_PATH)
 #print(include_packages)
 env.Append(CPPPATH=include_packages) #SDL2, Imgui, Gl3w
 #build lib file
@@ -31,7 +33,7 @@ env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR 
 #--gl
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api\\include\\glad\\*.c')) #Gl3w
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #Gl3w
-env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
+#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api\\include\\imgui\\*.cpp")) #imgui
 #--sdl2

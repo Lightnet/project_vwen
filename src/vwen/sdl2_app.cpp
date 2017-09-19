@@ -11,6 +11,7 @@
 #include <glad/glad.h>
 
 #include "vwen/vwen.h"
+#include "sdl2_app.h"
 
 #undef main
 
