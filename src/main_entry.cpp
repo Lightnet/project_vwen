@@ -86,7 +86,9 @@ int main(int argc, char* argv[]) //main entry point
     //BaseSDL::app(argc,argv);
     //BaseSDL_imgui::app(argc,argv);
     //sdl2_launcher(argc,argv);
-    AppSDL::sdl_app(argc,argv);
+    //AppSDL::sdl_app(argc,argv);
+
+    sdl_app(argc,argv);
 
     return 0;
 }

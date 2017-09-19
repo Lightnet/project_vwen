@@ -15,7 +15,7 @@
 
 #undef main
 
-namespace AppSDL{
+//namespace AppSDL{
 
 	// Window management
 	bool quit = false; // exit program
@@ -308,4 +308,4 @@ namespace AppSDL{
 		
 		return 0;
 	}
-}
+//}
