@@ -6,14 +6,13 @@ CURRENT_DIR = os.getcwd()
 #--------
 # Config files
 #--------
-SDL2_INCLUDE_PATH = 'C:\\SDL2-2.0.5\\include'
-SDL2_LIB_PATH = 'C:\\SDL2-2.0.5\\lib\\x86'
-IMGUI_PATH = 'src\\imgui'
+SDL2_INCLUDE_PATH = '' #'C:\\SDL2-2.0.5\\include'
+SDL2_LIB_PATH = ''
+#IMGUI_PATH = 'src\\imgui'
 #--------
 # Main application folder dir and output folder
 #--------
 VS_TOOL_BAT = 'C:\\Program Files (x86)\\Microsoft Visual Studio\\2017\\Community\\VC\\Auxiliary\\Build\\vcvars32.bat' #window
-
 
 projectname = 'project_vwen'				#holds the project name
 projectpackage = 'main'						#holds the project folder
@@ -41,11 +40,8 @@ include_packages.append(CURRENT_DIR + os.sep +'api\\include')
 include_packages.append(CURRENT_DIR + os.sep +'api\\include\\glad')
 include_packages.append(CURRENT_DIR + os.sep +'api\\include\\imgui')
 
-include_packages.append('C:\\Python27\\include')
-
-include_packages.append(CURRENT_DIR + os.sep +'api\\include\\pybind11')
-
-
+#include_packages.append('C:\\Python27\\include')
+#include_packages.append(CURRENT_DIR + os.sep +'api\\include\\pybind11')
 
 #include_packages.append(SRC_PATH)
 #include_packages.append(IMGUI_PATH)
@@ -69,14 +65,14 @@ lib_packages = []
 #lib_packages.append('glm')
 lib_packages.append('imgui')
 lib_packages.append('opengl32')
-lib_packages.append('gl3w')
-lib_packages.append('glfw3')
+#lib_packages.append('gl3w')
+#lib_packages.append('glfw3')
 lib_packages.append('glad')
 lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
 lib_packages.append('SDL2test')
 
-lib_packages.append('python27')
+#lib_packages.append('python27')
 
 #--add list
 lib_packages += core_packages

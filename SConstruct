@@ -43,11 +43,17 @@ else:
 
 # variables the sub build directories need
 #Export('env', 'sources', 'static_libs', 'test_sources')
-Export('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR')
+Export('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH')
 
 # build path checks
 target_dir = '#' + SelectBuildDir(build_base_dir)
 SConscript(target_dir + os.sep + 'SConscript')
+
+Import('SDL2_LIB_PATH')
+
+#print("SDL2_LIB_PATH")
+#print(SDL2_LIB_PATH)
+
 """
 #-- core include files
 for basename in core_packages:

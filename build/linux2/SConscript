@@ -3,16 +3,19 @@ import os
 
 # import these variables from the parent build script
 #Import('env', 'sources', 'static_libs', 'test_sources')
-Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR')
+Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH')
+
+SDL2_LIB_PATH = '/usr/local/lib'
+SDL2_INCLUDE_PATH = 'usr/local/include/SDL2'
 
 print("**** Sub Script win32 Config Build")
 #print(env)
 
-env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #work here
+#env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #work here
 #env.Append(LINKFLAGS=['/NODEFAULTLIB:library']) #does not work here
 
 #/NODEFAULTLIB:library
-env.AppendUnique(CXXFLAGS=["/MD","/EHsc"])
+#env.AppendUnique(CXXFLAGS=["/MD","/EHsc"])
 
 #env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #SDL2 need this
 for basename in core_packages:
@@ -42,9 +45,9 @@ for basename in core_packages:
 	#pass
 #print(core_packages)
 #--SDL2
-env.Install(CURRENT_DIR + os.sep + buildroot,"C:\\SDL2-2.0.5\\lib\\x86\\SDL2.dll") #copy dll to output bin
+env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy dll to output bin
 #--glfw3
-env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
+#env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
 
 #print("LIBS:")
 #print(lib_packages)

@@ -48,7 +48,11 @@ Default build VS2017 Window 10 32bit
 
 [Linux]
 
+    Need SDL2, Python 2.7, Scons to be install. (apt-get install)
+
    `scons` 
+
+   `./project_vwen` (run program)
 
 [Mac]
 
