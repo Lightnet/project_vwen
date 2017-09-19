@@ -220,7 +220,7 @@ namespace AppSDL{
 		//Vwen::ObjectNode Objnode;
 		//Vwen::ObjectNode2D Objnode;
 
-		//vwen::PolygonGL PolyGL;
+		vwen::PolygonGL PolyGL;
 			
 		// Main loop
 		while(!quit)
@@ -245,12 +245,27 @@ namespace AppSDL{
 				}
 
 				if (ImGui::Button("Add Polygon")){
+
+					using namespace vwen;
+					PolygonGL* onode = new PolygonGL();
+					vwen::addChild(onode);
+
+					//std::unique_ptr<ObjectNode> ptr = std::unique_ptr<ObjectNode>(new PolygonGL());
+					//vwen::addChild(PT);
+					//vwen::addChild(std::move(ptr));
 					//vwen::PolygonGL PolyGL;
 					//vwen::nodes.push_back(PolyGL);
 					//vwen::addChild(PolyGL);
-					vwen::nodeadd_test();
+					//vwen::nodeadd_test();
 
 					//vwen::addChild(PolyGL);
+
+					//vwen::nodeadd_test();
+				}
+
+				if (ImGui::Button("Polygon")){
+					PolyGL.Render();
+
 				}
 
 				if (ImGui::Button("Another Window")){

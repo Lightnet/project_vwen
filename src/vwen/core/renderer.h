@@ -26,12 +26,15 @@ namespace vwen{
     //std::vector<ObjectNode> nodes;
     //std::unique_ptr<ObjectNode> nodes;
 
-    std::vector<std::unique_ptr<ObjectNode> > nodes;
+    std::vector<std::unique_ptr<ObjectNode>> nodes;
 
 
     void Renderer(){
 
-        for(auto& p: nodes) p->Render(); // virtual dispatch
+        for(auto& p: nodes){
+            std::cout << p->GetName() << '\n';
+            p->Render(); // virtual dispatch
+        }
 
         // Iterate and print values of vector
         //for(ObjectNode n : nodes) {

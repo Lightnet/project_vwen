@@ -27,6 +27,14 @@ namespace vwen{
             virtual void Destroy(){
                 
             }
+
+            virtual string GetName(){
+                return name;
+            }
+
+            ObjectNode(){
+                name = "ObjectNode";
+            }
     };
 //End guard at bottom of header file
 #endif 

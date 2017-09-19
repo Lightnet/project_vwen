@@ -12,7 +12,7 @@ namespace vwen{
 #ifndef POLYCONGL_H
 #define POLYCONGL_H
 
-    class PolygonGL : public ObjectNode {
+    class PolygonGL : public virtual ObjectNode {
         // OpenGL
 	    GLuint shaderProgram;
     
@@ -149,9 +149,9 @@ namespace vwen{
                 cout << "Inside namespace vwen of ObjectNode" << endl;
             }
 
-            virtual void Render(){
+            void Render() {
                 
-                cout << "Inside namespace vwen of ObjectNode" << endl;
+                cout << "Inside namespace vwen of PolygonGL" << endl;
                 glUseProgram(shaderProgram);
                 glBindVertexArray(VAO);
                 glDrawArrays(GL_TRIANGLES, 0, vertices);
@@ -162,9 +162,14 @@ namespace vwen{
                 //}
             }
 
+            virtual string GetName(){
+                //return "Test";
+                return name;
+            }
+
             PolygonGL()
             {
-                
+                name = "PolygonGL";
                 //GLfloat Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
                 //float Vertices[] = {0.0f, -0.5f, 0.0f,-0.5f, 0.5f, 0.0f,0.5f, 0.5f, 0.0f};
                 //int size =  (sizeof(Vertices)/sizeof(Vertices[0]));
