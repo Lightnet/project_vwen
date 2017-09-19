@@ -1,1 +1,5 @@
-int sdl2_glad(int argc, char* argv[]);
+namespace BaseSDL{
+
+    int app(int argc, char* argv[]);
+
+}

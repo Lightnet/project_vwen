@@ -220,7 +220,7 @@ namespace AppSDL{
 		//Vwen::ObjectNode Objnode;
 		//Vwen::ObjectNode2D Objnode;
 
-		Vwen::PolygonGL PolyGL;
+		//vwen::PolygonGL PolyGL;
 			
 		// Main loop
 		while(!quit)
@@ -240,7 +240,20 @@ namespace AppSDL{
 						//show_test_window ^= 1;
 						//printf("Window Click\n");
 				//}
-				if (ImGui::Button("Another Window")){ 
+				if (ImGui::Button("Scene Nodes")){
+					vwen::print_nodes();
+				}
+
+				if (ImGui::Button("Add Polygon")){
+					//vwen::PolygonGL PolyGL;
+					//vwen::nodes.push_back(PolyGL);
+					//vwen::addChild(PolyGL);
+					vwen::nodeadd_test();
+
+					//vwen::addChild(PolyGL);
+				}
+
+				if (ImGui::Button("Another Window")){
 					show_another_window ^= 1;
 					//Vwen::func();
 					//Objnode.DoSomething();
@@ -250,8 +263,9 @@ namespace AppSDL{
 				ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 			}
 			
+			vwen::Renderer();
 
-			PolyGL.Render();
+			//PolyGL.Render();
 
 			// Draw functions
 			//glUseProgram(shaderProgram);

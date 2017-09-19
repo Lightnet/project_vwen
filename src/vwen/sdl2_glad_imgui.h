@@ -1,1 +1,8 @@
-int sdl2_glad_imgui(int argc, char* argv[]);
+
+
+
+
+namespace BaseSDL_imgui{
+
+    int app(int argc, char* argv[]);
+}

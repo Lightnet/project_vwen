@@ -41,6 +41,8 @@ include_packages.append(CURRENT_DIR + os.sep +'api\\include')
 include_packages.append(CURRENT_DIR + os.sep +'api\\include\\glad')
 include_packages.append(CURRENT_DIR + os.sep +'api\\include\\imgui')
 
+include_packages.append(CURRENT_DIR + os.sep +'api\\include\\imgui')
+
 
 #include_packages.append(SRC_PATH)
 #include_packages.append(IMGUI_PATH)
@@ -61,6 +63,7 @@ core_packages.append('vwen')
 
 #third parties packages
 lib_packages = []
+#lib_packages.append('glm')
 lib_packages.append('imgui')
 lib_packages.append('opengl32')
 lib_packages.append('gl3w')

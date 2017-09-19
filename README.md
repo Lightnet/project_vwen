@@ -26,11 +26,12 @@ Notes:
  * vsbuild_release.bat is to config for vs2017
 
 Third Parties / API:
- * Imgui
- * SDL2
+ * Imgui 1.51
+ * SDL2 2.0.5
  * gl3w
- * glfw
- * glad
+ * glfw 3.2.1
+ * glad v0.1.14a0
+ * glm 0.9.8.5
 
 
 [Scons Builds]:
