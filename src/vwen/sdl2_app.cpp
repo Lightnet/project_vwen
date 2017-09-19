@@ -3,17 +3,17 @@
  */
 
 
-#include <imgui.h>
-#include "imgui_impl_sdl2_glad.h"
+//#include <imgui.h>
+//#include "imgui_impl_sdl2_glad.h"
 #include <cstdio>
 #include <cstdlib>
 #include <SDL.h>
 #include <glad/glad.h>
 
-#include "vwen/vwen.h"
+//#include "vwen/vwen.h"
 #include "sdl2_app.h"
 
-#undef main
+//#undef main
 
 //namespace AppSDL{
 
@@ -66,7 +66,7 @@
 		if(window == NULL)
 			_sdlError("Could not create window");
 
-		ImGui_ImplSdlGLad_Init(window);
+		//ImGui_ImplSdlGLad_Init(window);
 
 		// Create OpenGL context
 		glContext = SDL_GL_CreateContext(window);
@@ -205,7 +205,7 @@
 		
 		bool show_test_window = true;
 		bool show_another_window = false;
-		ImVec4 clear_color = ImColor(114, 144, 154);
+		//ImVec4 clear_color = ImColor(114, 144, 154);
 
 		//https://stackoverflow.com/questions/12248703/creating-an-instance-of-class
 		//https://msdn.microsoft.com/en-us/library/5cb46ksf.aspx
@@ -221,7 +221,7 @@
 		//Vwen::ObjectNode Objnode;
 		//Vwen::ObjectNode2D Objnode;
 
-		vwen::PolygonGL PolyGL;
+		//vwen::PolygonGL PolyGL;
 			
 		// Main loop
 		while(!quit)
@@ -229,8 +229,8 @@
 			glClearColor(0.4f, 0.2f, 0.2f, 1.0f); // Clear the color buffer
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			ImGui_ImplSdlGLad_NewFrame(window);
-			
+			//ImGui_ImplSdlGLad_NewFrame(window);
+			/*
 			{
 				static float f = 0.0f;
 				ImGui::Text("Hello, world!");
@@ -282,25 +282,25 @@
 			vwen::Renderer();
 
 			//PolyGL.Render();
-
+			*/
 			// Draw functions
 			//glUseProgram(shaderProgram);
 			//glBindVertexArray(VAO);
 			//glDrawArrays(GL_TRIANGLES, 0, vertices);
 			//glBindVertexArray(0);
 		
-			ImGui::Render();
+			//ImGui::Render();
 			
 			SDL_GL_SwapWindow(window); // swap buffers
 			while(SDL_PollEvent(&event)) // handle events
 			{
-				ImGui_ImplSdlGLad_ProcessEvent(&event);
+				//ImGui_ImplSdlGLad_ProcessEvent(&event);
 				if(event.type == SDL_QUIT)
 					quit = true;
 			}
 		}
 
-		ImGui_ImplSdlGLad_Shutdown();
+		//ImGui_ImplSdlGLad_Shutdown();
 		// To do before exit the program
 		app_DeleteGLTrash();
 		app_DeleteSDLTrash();
