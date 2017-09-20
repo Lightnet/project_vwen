@@ -16,6 +16,8 @@ print("**** Sub Script win32 Config Build")
 #env.Append(LINKFLAGS=['-s'])
 #env.Append(CCFLAGS=['-DLINUX'])
 
+#env.Append(LINKFLAGS=['sdl-config --cflags'])
+
 env.Append(LDFLAGS=['-ldl'])
 
 include_packages.append(CURRENT_DIR + os.sep +'src')
@@ -27,8 +29,8 @@ include_packages.append(CURRENT_DIR + os.sep +'api/include')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
 
-print('==================')
-print('api/include/glad')
+#print('==================')
+#print('api/include/glad')
 
 #core_packages.append('vwen')
 
@@ -65,14 +67,17 @@ env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR 
 #--gl
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api/include/glad/*.c'),LDFLAGS="-Wl,--no-as-needed") #Glad
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api/include/glad/*.c'))
-print((CURRENT_DIR + os.sep +'api/include/glad/'))
+#print((CURRENT_DIR + os.sep +'api/include/glad/'))
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #Gl3w
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api/include/imgui/*.cpp")) #imgui
 #--sdl2
-#env.Library(buildroot + os.sep + 'SDL2',Glob("C:\\SDL2-2.0.5\\lib\\x86\\*.lib")) #
+#env.Library(CURRENT_DIR + os.sep +buildroot + os.sep + 'SDL2','/usr/local/lib/libSDL2.a') #
+#env.Library(CURRENT_DIR + os.sep +buildroot + os.sep + 'SDL2main','/usr/local/lib/libSDL2main.a') #
 #env.Library(buildroot + os.sep + 'SDL2', "C:\\SDL2-2.0.5\\lib\\x86\\SDL2.lib") #
+
+#env.Library(buildroot + os.sep + 'libSDL2', '/home/lightnet/SDL2-2.0.5/build/build/libSDL2.a') #
 #env.Library(buildroot + os.sep + 'SDL2main',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2main.lib") #
 #env.Library(buildroot + os.sep + 'SDL2test',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2test.lib") #
 
@@ -81,7 +86,13 @@ for basename in core_packages:
 	#pass
 #print(core_packages)
 #--SDL2
+#env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2-2.0.so.0") #copy dll to output bin
 env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy dll to output bin
+
+#env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.a") #copy dll to output bin
+
+#env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy dll to output bin
+#env.Install(CURRENT_DIR + os.sep + buildroot,"/home/lightnet/SDL2-2.0.5/build/build/libSDL2.so") #copy dll to output bin
 #--glfw3
 #env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
 
@@ -94,9 +105,11 @@ env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy 
 env.Append(CCFLAGS=['-D_REENTRANT'])
 env.Append(LINKFLAGS=['-Wno-undef'])
 
+env.Append(LD_LIBRARY_PATH='/usr/local/lib')
+
 env.Program(CURRENT_DIR + os.sep +targetpath, Glob(CURRENT_DIR + os.sep +builddir + os.sep + '*.cpp'),
 LIBS=lib_packages,
-LIBPATH=[CURRENT_DIR + os.sep + 'src', CURRENT_DIR + os.sep + buildroot, SDL2_LIB_PATH]#,
+LIBPATH=['/usr/lib','/usr/local/lib',CURRENT_DIR + os.sep + 'src', CURRENT_DIR + os.sep + buildroot, SDL2_LIB_PATH]#,
 #CXXFLAGS=['/NODEFAULTLIB:library']
 )
 print(CURRENT_DIR + os.sep + buildroot)
