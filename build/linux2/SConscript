@@ -39,6 +39,8 @@ lib_packages.append('glad')
 #lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
 lib_packages.append('libdl') #need this to work
+
+#lib_packages.append('sdl2-config --libs') #
 #/lib/i386-linux-gnu
 #--add list
 lib_packages += core_packages
@@ -87,7 +89,7 @@ for basename in core_packages:
 #print(core_packages)
 #--SDL2
 #env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2-2.0.so.0") #copy dll to output bin
-env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy dll to output bin
+#env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy dll to output bin
 
 #env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.a") #copy dll to output bin
 
@@ -102,10 +104,18 @@ env.Install(CURRENT_DIR + os.sep + buildroot,"/usr/local/lib/libSDL2.so") #copy 
 #print(buildroot)
 #print("Main:",builddir + os.sep + '*.cpp')
 
-env.Append(CCFLAGS=['-D_REENTRANT'])
-env.Append(LINKFLAGS=['-Wno-undef'])
+#env.Append(CCFLAGS=['-D_REENTRANT'])
+#env.Append(LINKFLAGS=['-Wno-undef'])
 
 env.Append(LD_LIBRARY_PATH='/usr/local/lib')
+
+#env.Append(CCFLAGS=['sdl2-config --cflags --libs sdl2'])
+
+
+#env.Append(LINKFLAGS=['/usr/local/bin/sdl2-config'])
+env.Append(CCFLAGS=['/usr/local/bin/sdl2-config'])
+
+#env.Append(CXXFLAGS=['pkg-config'])
 
 env.Program(CURRENT_DIR + os.sep +targetpath, Glob(CURRENT_DIR + os.sep +builddir + os.sep + '*.cpp'),
 LIBS=lib_packages,
@@ -114,4 +124,5 @@ LIBPATH=['/usr/lib','/usr/local/lib',CURRENT_DIR + os.sep + 'src', CURRENT_DIR +
 )
 print(CURRENT_DIR + os.sep + buildroot)
 print(CURRENT_DIR + os.sep + 'src')
+
 
