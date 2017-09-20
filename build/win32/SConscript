@@ -19,12 +19,17 @@ include_packages.append(CURRENT_DIR + os.sep +'api/include')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
 
+include_packages.append(CURRENT_DIR + os.sep +'api\\gl3w')
+include_packages.append(CURRENT_DIR + os.sep +'api\\glfw\\include')
+
 core_packages.append('vwen')
 
 lib_packages.append('imgui')
 lib_packages.append('glad')
 lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
+lib_packages.append('gl3w')
+lib_packages.append('glfw3')
 
 #--add list
 lib_packages += core_packages
@@ -55,8 +60,8 @@ env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR 
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'python27' , ['C:\\Python27\\libs\\python27.lib'])
 #--gl
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api\\include\\glad\\*.c')) #Gl3w
-#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #Gl3w
-#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #gl3w
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3dll
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api\\include\\imgui\\*.cpp")) #imgui
 #--sdl2
@@ -72,7 +77,7 @@ for basename in core_packages:
 #--SDL2
 env.Install(CURRENT_DIR + os.sep + buildroot,"C:\\SDL2-2.0.5\\lib\\x86\\SDL2.dll") #copy dll to output bin
 #--glfw3
-#env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
+env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
 
 #print("LIBS:")
 #print(lib_packages)

@@ -41,8 +41,8 @@ static void show_usage(std::string name)
 }
 //----
 
-//int main_test(int argc, char* argv[]) //main entry point
-int main(int argc, char* argv[]) //main entry point
+int main_test(int argc, char* argv[]) //main entry point
+//int main(int argc, char* argv[]) //main entry point
 {
 	if (argc < 3) {
         //printf(string(argc));

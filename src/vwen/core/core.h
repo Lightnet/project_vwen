@@ -5,6 +5,8 @@
 #include "ObjectNode.h"
 #include "ObjectNode2D.h"
 #include "../meshes/PolygonGL.h"
+#include "../meshes/CubeGL.h"
+
 
 #include "renderer.h"
 
