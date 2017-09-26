@@ -59,7 +59,10 @@
         "xlocbuf": "cpp",
         "xlocmes": "cpp",
         "xlocmon": "cpp",
-        "xloctime": "cpp"
+        "xloctime": "cpp",
+        "forward_list": "cpp",
+        "fstream": "cpp",
+        "valarray": "cpp"
     },
     "development_mode":"release",       //development build mode
     "output_dir":"bin",                 //out put bin builds

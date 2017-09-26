@@ -739,7 +739,8 @@ static void mainLoop(CubeApp *app)
  * PROGRAM ENTRY POINT                                                      *
  ****************************************************************************/
 
-int main (int argc, char **argv)
+//int main (int argc, char **argv)
+int maintest (int argc, char **argv)
 {
 	CubeApp app;	/* the cube application stata stucture */
 

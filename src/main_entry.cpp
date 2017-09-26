@@ -15,7 +15,7 @@
 //#include "vwen/sdl2_glad_imgui.h"
 //#include "vwen/sdl2_launcher.h"
 
-#include "vwen/sdl2_app.h"
+//#include "vwen/sdl2_app.h"
 
 #include <stdio.h>
 #include <string>
@@ -88,7 +88,7 @@ int main_test(int argc, char* argv[]) //main entry point
     //sdl2_launcher(argc,argv);
     //AppSDL::sdl_app(argc,argv);
 
-    sdl_app(argc,argv);
+    //sdl_app(argc,argv);
 
     return 0;
 }
