@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h> // GLFW helper library
 #include <stdio.h>
 
-int main() {
+int main_gflwglew() {
   // start GL context and O/S window using the GLFW helper library
   if (!glfwInit()) {
     fprintf(stderr, "ERROR: could not start GLFW3\n");

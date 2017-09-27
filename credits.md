@@ -18,6 +18,12 @@ Links for refs:
 
  * https://github.com/derhass/HelloCube
  * http://headerphile.com/category/sdl2/ ( ref)
+ * http://headerphile.com/sdl2/opengl-part-1-sdl-opengl-awesome/
+ * https://gist.github.com/exavolt/2360410
+
+ * https://gitlab.com/wikibooks-opengl/modern-tutorials/tree/master/tut01_intro-sdl2
+ * https://gitlab.com/wikibooks-opengl/modern-tutorials
+ * https://en.wikibooks.org/wiki/OpenGL_Programming/Modern_OpenGL_Introduction
  
 
 

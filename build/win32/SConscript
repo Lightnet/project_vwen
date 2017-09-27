@@ -34,6 +34,7 @@ lib_packages.append('SDL2')
 #lib_packages.append('gl3w')
 lib_packages.append('glew')
 lib_packages.append('glfw3')
+lib_packages.append('opengl32') # window might need this to get the glClearColor glClear
 
 #--add list
 lib_packages += core_packages
@@ -42,6 +43,7 @@ include_packages +=core_packages
 
 
 env.Append(LINKFLAGS=['/SUBSYSTEM:CONSOLE']) #work here
+env.Append(LINKFLAGS=['/MACHINE:X86']) #work here
 #env.Append(LINKFLAGS=['/NODEFAULTLIB:library']) #does not work here
 
 #/NODEFAULTLIB:library
@@ -70,6 +72,7 @@ env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3dll
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glew',CURRENT_DIR + os.sep + "api\\glew\\lib\\release\\win32\\glew32.lib") #glew
+#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glew',CURRENT_DIR + os.sep + "api\\glew\\lib\\release\\x64\\glew32.lib") #glew
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api\\include\\imgui\\*.cpp")) #imgui
 #--sdl2
