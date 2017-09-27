@@ -5,8 +5,8 @@ import os
 #Import('env', 'sources', 'static_libs', 'test_sources')
 Import('env','SRC_PATH','buildroot','include_packages','core_packages','CURRENT_DIR','SDL2_LIB_PATH','SDL2_INCLUDE_PATH','buildroot','targetpath','builddir','lib_packages')
 
-SDL2_LIB_PATH = 'C:\\SDL2-2.0.5\\lib\\x86'
-SDL2_INCLUDE_PATH = 'C:\\SDL2-2.0.5\\include'
+SDL2_LIB_PATH = 'C:\\SDL2-2.0.6\\lib\\x86'
+SDL2_INCLUDE_PATH = 'C:\\SDL2-2.0.6\\include'
 
 print("**** Sub Script win32 Config Build")
 #print(env)
@@ -16,24 +16,23 @@ include_packages.append(CURRENT_DIR + os.sep +'src')
 include_packages.append(CURRENT_DIR + os.sep +'src/vwen')
 
 include_packages.append(CURRENT_DIR + os.sep +'api/include')
-#include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
+include_packages.append(CURRENT_DIR + os.sep +'api/include/glad')
 include_packages.append(CURRENT_DIR + os.sep +'api/include/imgui')
 
 #include_packages.append(CURRENT_DIR + os.sep +'api/gl3w')
 
-include_packages.append(CURRENT_DIR + os.sep +'api/glew/include')
-
-include_packages.append(CURRENT_DIR + os.sep +'api/glfw/include')
+#include_packages.append(CURRENT_DIR + os.sep +'api/glew/include')
+#include_packages.append(CURRENT_DIR + os.sep +'api/glfw/include')
 
 core_packages.append('vwen')
 
 lib_packages.append('imgui')
-#lib_packages.append('glad')
+lib_packages.append('glad')
 lib_packages.append('SDL2main')
 lib_packages.append('SDL2')
 #lib_packages.append('gl3w')
-lib_packages.append('glew')
-lib_packages.append('glfw3')
+#lib_packages.append('glew')
+#lib_packages.append('glfw3')
 lib_packages.append('opengl32') # window might need this to get the glClearColor glClear
 
 #--add list
@@ -65,36 +64,35 @@ env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'vwen',Glob(CURRENT_DIR 
 #--python
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'python27' , ['C:\\Python27\\libs\\python27.lib'])
 #--gl
-#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api\\include\\glad\\*.c')) #glad
+env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glad',Glob(CURRENT_DIR + os.sep +'api\\include\\glad\\*.c')) #glad
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #gl3w
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'gl3w',Glob(CURRENT_DIR + os.sep +'api\\gl3w\\GL\\*.c')) #gl3w
-
-env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3dll
-
-env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glew',CURRENT_DIR + os.sep + "api\\glew\\lib\\release\\win32\\glew32.lib") #glew
+#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glfw3',CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3dll.lib") #glfw3dll
+#env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glew',CURRENT_DIR + os.sep + "api\\glew\\lib\\release\\win32\\glew32.lib") #glew
 #env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'glew',CURRENT_DIR + os.sep + "api\\glew\\lib\\release\\x64\\glew32.lib") #glew
 
 env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + 'imgui',Glob(CURRENT_DIR + os.sep + "api\\include\\imgui\\*.cpp")) #imgui
 #--sdl2
-#env.Library(buildroot + os.sep + 'SDL2',Glob("C:\\SDL2-2.0.5\\lib\\x86\\*.lib")) #
-#env.Library(buildroot + os.sep + 'SDL2', "C:\\SDL2-2.0.5\\lib\\x86\\SDL2.lib") #
-#env.Library(buildroot + os.sep + 'SDL2main',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2main.lib") #
 #env.Library(buildroot + os.sep + 'SDL2test',"C:\\SDL2-2.0.5\\lib\\x86\\SDL2test.lib") #
+#env.Library(buildroot + os.sep + 'SDL2',Glob("C:\\SDL2-2.0.5\\lib\\x86\\*.lib")) #
+env.Library(buildroot + os.sep + 'SDL2', "C:/SDL2-2.0.6/lib/x86/SDL2.lib") #SDL2
+env.Library(buildroot + os.sep + 'SDL2main',"C:/SDL2-2.0.6/lib/x86/SDL2main.lib") #SDL2main
+
 
 for basename in core_packages:
 	env.Library(CURRENT_DIR + os.sep + buildroot + os.sep + basename, Glob(CURRENT_DIR + os.sep + SRC_PATH + os.sep + basename + os.sep + '*.cpp')) #core nodes
 	#pass
 #print(core_packages)
 
-glew_path = CURRENT_DIR + "/api/glew/bin/Release/Win32/glew32.dll"
+#glew_path = CURRENT_DIR + "/api/glew/bin/Release/Win32/glew32.dll"
 
-print("DIR:",glew_path)
-env.Install(CURRENT_DIR + os.sep + buildroot, glew_path) #copy dll to output bin
+#print("DIR:",glew_path)
+#env.Install(CURRENT_DIR + os.sep + buildroot, glew_path) #copy dll to output bin
 
 #--SDL2
-env.Install(CURRENT_DIR + os.sep + buildroot,"C:\\SDL2-2.0.5\\lib\\x86\\SDL2.dll") #copy dll to output bin
+env.Install(CURRENT_DIR + os.sep + buildroot,"C:\\SDL2-2.0.6\\lib\\x86\\SDL2.dll") #copy dll to output bin
 #--glfw3
-env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
+#env.Install(CURRENT_DIR + os.sep + buildroot,CURRENT_DIR + os.sep + "api\\glfw\\lib-vs2015\\glfw3.dll") #copy dll to output bin
 
 #print("LIBS:")
 #print(lib_packages)

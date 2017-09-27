@@ -15,13 +15,13 @@
 //#include "vwen/sdl2_glad_imgui.h"
 //#include "vwen/sdl2_launcher.h"
 
-//#include "vwen/sdl2_app.h"
+#include "vwen/sdl2_app.h"
 
 #include <stdio.h>
 #include <string>
 #include <iostream>
 
-#undef main
+//#undef main
 
 using namespace std;
 
@@ -41,7 +41,7 @@ static void show_usage(std::string name)
 }
 //----
 
-int main_test(int argc, char* argv[]) //main entry point
+int main(int argc, char* argv[]) //main entry point
 //int main(int argc, char* argv[]) //main entry point
 {
 	if (argc < 3) {
@@ -88,7 +88,7 @@ int main_test(int argc, char* argv[]) //main entry point
     //sdl2_launcher(argc,argv);
     //AppSDL::sdl_app(argc,argv);
 
-    //sdl_app(argc,argv);
+    sdl_app(argc,argv);
 
     return 0;
 }

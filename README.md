@@ -27,20 +27,16 @@ Notes:
 
 Third Parties / API:
  * Imgui 1.51
- * SDL2 2.0.5
+ * SDL2 2.0.6
  * gl3w
+ * glew 
  * glfw 3.2.1
  * glad v0.1.14a0
  * glm 0.9.8.5
 
-
 [Scons Builds]:
 
 Default build VS2017 Window 10 32bit
-
-[Mingw]
-
-   `scons`
 
 [window 10 | viusal studio]
 
@@ -53,10 +49,6 @@ Default build VS2017 Window 10 32bit
    `scons` 
 
    `./project_vwen` (run program)
-
-[Mac]
-
-   `scons` 
 
 Refs:
   * ...
